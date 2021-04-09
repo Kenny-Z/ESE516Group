@@ -213,6 +213,8 @@ void write_bin_file(char test_bin_file[]){
 	uint32_t row = 0;
 	uint8_t readBuffer[256];
 	uint32_t Cur_App_Address=0;
+	uint32_t resultCrcNvm = 0;
+	uint32_t resultCrcSd = 0;
 	fr = f_stat(test_bin_file, &fno);
 	switch (fr) {
 		case FR_OK:
@@ -256,7 +258,7 @@ void write_bin_file(char test_bin_file[]){
 			while(numBytesLeft  != 0)
 			{
 				res = f_read(&file_object, &readBuffer[numberBytesTotal], numBytesLeft, &numBytesRead); //Question to students: What is numBytesRead? What are we doing here?
-				numBytesLeft -= numBytesRead;
+				numBytesLeft -= numBytesLeft;
 				numberBytesTotal += numBytesRead;
 			}
 				
@@ -276,15 +278,15 @@ void write_bin_file(char test_bin_file[]){
 			
 				
 					
-			uint32_t resultCrcSd = 0;
+			
 			
 			*((volatile unsigned int*) 0x41007058) &= ~0x30000UL;
 			
 			enum status_code crcres = dsu_crc32_cal	(readBuffer	,256, &resultCrcSd); //Instructor note: Was it the third parameter used for? Please check how you can use the third parameter to do the CRC of a long data stream in chunks - you will need it!
 			*((volatile unsigned int*) 0x41007058) |= 0x20000UL;
 			//CRC of memory (NVM)
-			uint32_t resultCrcNvm = 0;
-			crcres |= dsu_crc32_cal	((uint32_t)Cur_App_Address,256, &resultCrcNvm);
+			
+			crcres |= dsu_crc32_cal	(Cur_App_Address,256, &resultCrcNvm);
 			if (crcres != STATUS_OK)
 			{
 				SerialConsoleWriteString("Could not calculate CRC!!\r\n");
@@ -293,9 +295,14 @@ void write_bin_file(char test_bin_file[]){
 			else if(resultCrcNvm!=resultCrcSd){
 				SerialConsoleWriteString("CRC ERROR!!\r\n");
 			}
-			f_close(&file_object);
-			break;
+			else{
+				snprintf(helpStr, 63,"CRC SD CARD: %d  CRC NVM: %d \r\n", resultCrcNvm, resultCrcSd);
+				SerialConsoleWriteString(helpStr);
+			}
+			
+			
 		}
+		f_close(&file_object);
 		break;
 		
 		
