@@ -65,23 +65,23 @@ void vSensorReadTask( void *pvParameters )
 // 		VEML_Read_Config(&config);
 // 		snprintf(sensormsg, 15, "Config:%d\r\n", config);
 // 		SerialConsoleWriteString(sensormsg);
-// 		VEML_Power_On();
-// 		vTaskDelay(1000);
 		VEML_Power_On();
- 		vTaskDelay(200);
+		vTaskDelay(1000);
+// 		VEML_Power_On();
+//  		vTaskDelay(200);
 // 		VEML_Read_Config(&config);
 // 		snprintf(sensormsg, 15, "Config:%d\r\n", config);
 // 		SerialConsoleWriteString(sensormsg);
 /* 		vTaskDelay(500);*/
 		VEML_ReadALSData(&lightdata);
-// 		snprintf(sensormsg, 15, "Light ALS: %d\r\n", lightdata);
-// 		SerialConsoleWriteString(sensormsg);
+		snprintf(sensormsg, 15, "Light ALS: %d\r\n", lightdata);
+		SerialConsoleWriteString(sensormsg);
 // 		vTaskDelay(500);
 // 		VEML_Power_Saving();
 // 		vTaskDelay(500);
 // 		VEML_Read_Power_Saving(&powersaving);
 // 		snprintf(sensormsg, 15, "Power saving:%d\r\n", powersaving);
-//		SerialConsoleWriteString(sensormsg);
+// 		SerialConsoleWriteString(sensormsg);
 		VEML_Power_Off();
 
 		vTaskDelay(1000);
