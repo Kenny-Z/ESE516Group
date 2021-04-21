@@ -10,7 +10,11 @@ src\CliThread\CliThread.c
 
 src\I2CDriver\I2CDriver.c
 
+src\KeyboardDriver\SeesawDriver.c
+
 src\LightSensor\VEML6030.c
+
+src\OLED\OLED_driver.c
 
 src\Template\template.c
 

@@ -1165,6 +1165,9 @@
     <Folder Include="src\CliThread" />
     <Folder Include="src\I2CDriver" />
     <Folder Include="src\LightSensor" />
+    <Folder Include="src\KeyboardDriver" />
+    <Folder Include="src\OLED" />
+    <Folder Include="src\OLED\util" />
     <Folder Include="src\Template" />
     <Folder Include="src\SensorReadThread" />
     <Folder Include="src\WifiHandlerThread" />
@@ -1195,10 +1198,37 @@
     <Compile Include="src\I2CDriver\I2CDriver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\KeyboardDriver\Seesaw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\KeyboardDriver\SeesawDriver.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\LightSensor\VEML6030.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\LightSensor\VEML6030.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\OLED_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\OLED_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\util\7segment.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\util\font5x7.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\util\font8x16.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\util\fontlargeletter31x48.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\OLED\util\fontlargenumber.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Template\template.c">

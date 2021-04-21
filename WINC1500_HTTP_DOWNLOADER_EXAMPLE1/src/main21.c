@@ -23,6 +23,7 @@
 #include "FreeRTOS.h"
 #include "driver/include/m2m_wifi.h"
 #include "CliThread/CliThread.h"
+#include "OLED/OLED_driver.h"
 #include "WifiHandlerThread/WifiHandler.h"
 #include "SensorReadThread/SensorThread.h"
 #include "LightSensor/VEML6030.h"
@@ -175,6 +176,14 @@ void vApplicationDaemonTaskStartupHook(void)
 // 	TestA(); //Comment me for Test B
 // 	//TestB(); //Comment me for Test A
 // #endif
+	if (InitializeOLEDdriver() != STATUS_OK)
+	{
+		SerialConsoleWriteString("Error initializing OLED Driver!\r\n");
+	}
+	else
+	{
+		SerialConsoleWriteString("Initialized OLED Driver!\r\n");
+	}
 	StartTasks();
 
 	vTaskSuspend(daemonTaskHandle);

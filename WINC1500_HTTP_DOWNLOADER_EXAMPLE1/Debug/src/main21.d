@@ -219,6 +219,7 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/common/components/wifi/winc1500/driver/source/nmdrv.h \
  ../src/CliThread/CliThread.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h \
+ ../src/OLED/OLED_driver.h ../src/I2cDriver/I2cDriver.h \
  ../src/WifiHandlerThread/WifiHandler.h \
  ../src/SensorReadThread/SensorThread.h ../src/LightSensor/VEML6030.h \
  ../src/ASF/thirdparty/pahomqtt/MQTTClient/Platforms/MCHP_ATWx.h \
@@ -683,6 +684,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/CliThread/CliThread.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h:
+
+../src/OLED/OLED_driver.h:
+
+../src/I2cDriver/I2cDriver.h:
 
 ../src/WifiHandlerThread/WifiHandler.h:
 

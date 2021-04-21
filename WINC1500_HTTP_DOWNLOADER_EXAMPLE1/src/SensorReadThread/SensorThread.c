@@ -74,8 +74,8 @@ void vSensorReadTask( void *pvParameters )
 // 		SerialConsoleWriteString(sensormsg);
 /* 		vTaskDelay(500);*/
 		VEML_ReadALSData(&lightdata);
-		snprintf(sensormsg, 15, "Light ALS: %d\r\n", lightdata);
-		SerialConsoleWriteString(sensormsg);
+// 		snprintf(sensormsg, 15, "Light ALS: %d\r\n", lightdata);
+// 		SerialConsoleWriteString(sensormsg);
 // 		vTaskDelay(500);
 // 		VEML_Power_Saving();
 // 		vTaskDelay(500);

@@ -204,7 +204,9 @@ src/CliThread/CliThread.d src/CliThread/CliThread.o: \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
  ../src/ASF/sam0/drivers/tcc/tcc.h ../src/SerialConsole/SerialConsole.h \
  ../src/SerialConsole/circular_buffer.h \
- ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h \
+ ../src/Lightsensor/VEML6030.h ../src/KeyboardDriver/Seesaw.h \
+ ../src/I2cDriver/I2cDriver.h ../src/OLED_driver/OLED_driver.h
 
 ../src/CliThread/CliThread.h:
 
@@ -633,3 +635,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/SerialConsole/circular_buffer.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h:
+
+../src/Lightsensor/VEML6030.h:
+
+../src/KeyboardDriver/Seesaw.h:
+
+../src/I2cDriver/I2cDriver.h:
+
+../src/OLED_driver/OLED_driver.h:
