@@ -84,6 +84,6 @@ void vSensorReadTask( void *pvParameters )
 // 		SerialConsoleWriteString(sensormsg);
 		VEML_Power_Off();
 
-		vTaskDelay(1000);
+		vTaskDelay(5000);
 	}
 }

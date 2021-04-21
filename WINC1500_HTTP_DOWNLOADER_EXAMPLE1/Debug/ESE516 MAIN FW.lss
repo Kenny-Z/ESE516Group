@@ -3827,29 +3827,29 @@ void vSensorReadTask( void *pvParameters )
 	//VEML_Filter_L_Threshold();
 	delay_ms(100);
    134f8:	2064      	movs	r0, #100	; 0x64
-   134fa:	4b17      	ldr	r3, [pc, #92]	; (13558 <vSensorReadTask+0x74>)
+   134fa:	4b16      	ldr	r3, [pc, #88]	; (13554 <vSensorReadTask+0x70>)
    134fc:	4798      	blx	r3
 	VEML_Reset();
-   134fe:	4b17      	ldr	r3, [pc, #92]	; (1355c <vSensorReadTask+0x78>)
+   134fe:	4b16      	ldr	r3, [pc, #88]	; (13558 <vSensorReadTask+0x74>)
    13500:	4798      	blx	r3
 	//VEML_Filter_H_Threshold();
 	delay_ms(100);
    13502:	2064      	movs	r0, #100	; 0x64
-   13504:	4b14      	ldr	r3, [pc, #80]	; (13558 <vSensorReadTask+0x74>)
+   13504:	4b13      	ldr	r3, [pc, #76]	; (13554 <vSensorReadTask+0x70>)
    13506:	4798      	blx	r3
 	//VEML_Power_Saving();
 	delay_ms(100);
    13508:	2064      	movs	r0, #100	; 0x64
-   1350a:	4b13      	ldr	r3, [pc, #76]	; (13558 <vSensorReadTask+0x74>)
+   1350a:	4b12      	ldr	r3, [pc, #72]	; (13554 <vSensorReadTask+0x70>)
    1350c:	4798      	blx	r3
     /* Send a welcome message to the user knows they are connected. */
     SerialConsoleWriteString( pcWelcomeMessage);
-   1350e:	4b14      	ldr	r3, [pc, #80]	; (13560 <vSensorReadTask+0x7c>)
+   1350e:	4b13      	ldr	r3, [pc, #76]	; (1355c <vSensorReadTask+0x78>)
    13510:	0018      	movs	r0, r3
-   13512:	4b14      	ldr	r3, [pc, #80]	; (13564 <vSensorReadTask+0x80>)
+   13512:	4b13      	ldr	r3, [pc, #76]	; (13560 <vSensorReadTask+0x7c>)
    13514:	4798      	blx	r3
 	VEML_Power_On();
-   13516:	4b14      	ldr	r3, [pc, #80]	; (13568 <vSensorReadTask+0x84>)
+   13516:	4b13      	ldr	r3, [pc, #76]	; (13564 <vSensorReadTask+0x80>)
    13518:	4798      	blx	r3
 // 		VEML_Power_Off();
 // 		vTaskDelay(500);
@@ -3857,13 +3857,13 @@ void vSensorReadTask( void *pvParameters )
 // 		snprintf(sensormsg, 15, "Config:%d\r\n", config);
 // 		SerialConsoleWriteString(sensormsg);
 		VEML_Power_On();
-   1351a:	4b13      	ldr	r3, [pc, #76]	; (13568 <vSensorReadTask+0x84>)
+   1351a:	4b12      	ldr	r3, [pc, #72]	; (13564 <vSensorReadTask+0x80>)
    1351c:	4798      	blx	r3
 		vTaskDelay(1000);
    1351e:	23fa      	movs	r3, #250	; 0xfa
    13520:	009b      	lsls	r3, r3, #2
    13522:	0018      	movs	r0, r3
-   13524:	4b11      	ldr	r3, [pc, #68]	; (1356c <vSensorReadTask+0x88>)
+   13524:	4b10      	ldr	r3, [pc, #64]	; (13568 <vSensorReadTask+0x84>)
    13526:	4798      	blx	r3
 //  		vTaskDelay(200);
 // 		VEML_Read_Config(&config);
@@ -3874,19 +3874,19 @@ void vSensorReadTask( void *pvParameters )
    13528:	230c      	movs	r3, #12
    1352a:	18fb      	adds	r3, r7, r3
    1352c:	0018      	movs	r0, r3
-   1352e:	4b10      	ldr	r3, [pc, #64]	; (13570 <vSensorReadTask+0x8c>)
+   1352e:	4b0f      	ldr	r3, [pc, #60]	; (1356c <vSensorReadTask+0x88>)
    13530:	4798      	blx	r3
 		snprintf(sensormsg, 15, "Light ALS: %d\r\n", lightdata);
    13532:	68fb      	ldr	r3, [r7, #12]
-   13534:	4a0f      	ldr	r2, [pc, #60]	; (13574 <vSensorReadTask+0x90>)
-   13536:	4810      	ldr	r0, [pc, #64]	; (13578 <vSensorReadTask+0x94>)
+   13534:	4a0e      	ldr	r2, [pc, #56]	; (13570 <vSensorReadTask+0x8c>)
+   13536:	480f      	ldr	r0, [pc, #60]	; (13574 <vSensorReadTask+0x90>)
    13538:	210f      	movs	r1, #15
-   1353a:	4c10      	ldr	r4, [pc, #64]	; (1357c <vSensorReadTask+0x98>)
+   1353a:	4c0f      	ldr	r4, [pc, #60]	; (13578 <vSensorReadTask+0x94>)
    1353c:	47a0      	blx	r4
 		SerialConsoleWriteString(sensormsg);
-   1353e:	4b0e      	ldr	r3, [pc, #56]	; (13578 <vSensorReadTask+0x94>)
+   1353e:	4b0d      	ldr	r3, [pc, #52]	; (13574 <vSensorReadTask+0x90>)
    13540:	0018      	movs	r0, r3
-   13542:	4b08      	ldr	r3, [pc, #32]	; (13564 <vSensorReadTask+0x80>)
+   13542:	4b07      	ldr	r3, [pc, #28]	; (13560 <vSensorReadTask+0x7c>)
    13544:	4798      	blx	r3
 // 		VEML_Power_Saving();
 // 		vTaskDelay(500);
@@ -3894,29 +3894,28 @@ void vSensorReadTask( void *pvParameters )
 // 		snprintf(sensormsg, 15, "Power saving:%d\r\n", powersaving);
 // 		SerialConsoleWriteString(sensormsg);
 		VEML_Power_Off();
-   13546:	4b0e      	ldr	r3, [pc, #56]	; (13580 <vSensorReadTask+0x9c>)
+   13546:	4b0d      	ldr	r3, [pc, #52]	; (1357c <vSensorReadTask+0x98>)
    13548:	4798      	blx	r3
 
-		vTaskDelay(1000);
-   1354a:	23fa      	movs	r3, #250	; 0xfa
-   1354c:	009b      	lsls	r3, r3, #2
-   1354e:	0018      	movs	r0, r3
-   13550:	4b06      	ldr	r3, [pc, #24]	; (1356c <vSensorReadTask+0x88>)
-   13552:	4798      	blx	r3
+		vTaskDelay(5000);
+   1354a:	4b0d      	ldr	r3, [pc, #52]	; (13580 <vSensorReadTask+0x9c>)
+   1354c:	0018      	movs	r0, r3
+   1354e:	4b06      	ldr	r3, [pc, #24]	; (13568 <vSensorReadTask+0x84>)
+   13550:	4798      	blx	r3
 		VEML_Power_On();
-   13554:	e7e1      	b.n	1351a <vSensorReadTask+0x36>
-   13556:	46c0      	nop			; (mov r8, r8)
-   13558:	00016e19 	.word	0x00016e19
-   1355c:	000132b9 	.word	0x000132b9
-   13560:	0001be78 	.word	0x0001be78
-   13564:	00016bc5 	.word	0x00016bc5
-   13568:	00013351 	.word	0x00013351
-   1356c:	00015559 	.word	0x00015559
-   13570:	000133c1 	.word	0x000133c1
-   13574:	0001be90 	.word	0x0001be90
-   13578:	20000144 	.word	0x20000144
-   1357c:	0001b719 	.word	0x0001b719
-   13580:	00013389 	.word	0x00013389
+   13552:	e7e2      	b.n	1351a <vSensorReadTask+0x36>
+   13554:	00016e19 	.word	0x00016e19
+   13558:	000132b9 	.word	0x000132b9
+   1355c:	0001be78 	.word	0x0001be78
+   13560:	00016bc5 	.word	0x00016bc5
+   13564:	00013351 	.word	0x00013351
+   13568:	00015559 	.word	0x00015559
+   1356c:	000133c1 	.word	0x000133c1
+   13570:	0001be90 	.word	0x0001be90
+   13574:	20000144 	.word	0x20000144
+   13578:	0001b719 	.word	0x0001b719
+   1357c:	00013389 	.word	0x00013389
+   13580:	00001388 	.word	0x00001388
 
 00013584 <system_gclk_chan_get_config_defaults>:
  *
