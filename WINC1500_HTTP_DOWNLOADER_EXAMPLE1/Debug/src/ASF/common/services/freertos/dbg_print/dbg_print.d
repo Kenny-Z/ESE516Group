@@ -131,6 +131,13 @@ src/ASF/common/services/freertos/dbg_print/dbg_print.d \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/FreeRTOS.h \
  ../src/config/FreeRTOSConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/portable.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/deprecated_definitions.h \
@@ -406,6 +413,20 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/FreeRTOS.h:
 
 ../src/config/FreeRTOSConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h:
 

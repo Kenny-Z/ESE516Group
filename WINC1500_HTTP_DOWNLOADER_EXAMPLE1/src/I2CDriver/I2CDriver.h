@@ -12,7 +12,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-	#endif
+#endif
 
 
 #include "i2c_master.h"
@@ -105,7 +105,6 @@ int32_t I2cGetMutex(TickType_t waitTime);
 int32_t I2cFreeMutex(void);
 int32_t I2cReadData(I2C_Data *data);
 int32_t I2cWriteData(I2C_Data *data);
-int32_t I2cWriteData_No_Stop(I2C_Data *data);
 int32_t I2cInitializeDriver(void);
 void I2cDriverRegisterSensorBusCallbacks(void);
 void I2cSensorsError(struct i2c_master_module *const module);

@@ -29,7 +29,7 @@
 /******************************************************************************
 * Defines
 ******************************************************************************/
-#define RX_BUFFER_SIZE 512	///<Size of character buffer for RX, in bytes
+#define RX_BUFFER_SIZE 256	///<Size of character buffer for RX, in bytes
 #define TX_BUFFER_SIZE 512	///<Size of character buffers for TX, in bytes
 
 char debugBuffer[128];
@@ -83,7 +83,7 @@ void InitializeSerialConsole(void)
 
 	//Initialize circular buffers for RX and TX
 	cbufRx = circular_buf_init((uint8_t*)rxCharacterBuffer, RX_BUFFER_SIZE);
-	cbufTx = circular_buf_init((uint8_t*)txCharacterBuffer, RX_BUFFER_SIZE);
+	cbufTx = circular_buf_init((uint8_t*)txCharacterBuffer, TX_BUFFER_SIZE);
 
 	//Configure USART and Callbacks
 	configure_usart();
@@ -111,10 +111,10 @@ void DeinitializeSerialConsole(void)
 * @details		Uses the ringbuffer 'cbufTx', which in turn uses the array 'txCharacterBuffer'. Modified to be thread safe.
 * @note			Use to send a string of characters to the user via UART
 *****************************************************************************/
-void SerialConsoleWriteString(char * string)
+void SerialConsoleWriteString(const char * string)
 {
 vTaskSuspendAll();
-	if(string != NULL)
+ 	if(string != NULL)
 	{
 		for (size_t iter = 0; iter < strlen(string); iter++)
 		{

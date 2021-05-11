@@ -24,7 +24,9 @@
 #ifndef SERIAL_CONSOLE_H
 #define SERIAL_CONSOLE_H
 
-
+#ifdef __cplusplus
+extern "C" {
+	#endif
 /******************************************************************************
 * Includes
 ******************************************************************************/
@@ -58,7 +60,7 @@ enum eDebugLogLevels {
 ******************************************************************************/
 void InitializeSerialConsole(void);
 void DeinitializeSerialConsole(void);
-void SerialConsoleWriteString(char * string);
+void SerialConsoleWriteString(const char * string);
 int SerialConsoleReadCharacter(uint8_t *rxChar);
 void LogMessage(enum eDebugLogLevels level, const char *format, ...);
 void setLogLevel(enum eDebugLogLevels debugLevel);
@@ -70,13 +72,9 @@ void LogMessageDebug(const char *format, ...);
 * Local Functions
 ******************************************************************************/
 
-
-
-
-
-
-
-
+#ifdef __cplusplus
+}
+	#endif
 
 #endif /* SERIAL_CONSOLE_H */
 

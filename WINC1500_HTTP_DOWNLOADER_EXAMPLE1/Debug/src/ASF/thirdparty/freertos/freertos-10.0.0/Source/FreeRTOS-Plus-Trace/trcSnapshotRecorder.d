@@ -125,7 +125,10 @@ src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/trcSnapsh
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/portable.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/deprecated_definitions.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/portable/GCC/ARM_CM0/portmacro.h \
- ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/mpu_wrappers.h
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/mpu_wrappers.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h:
 
@@ -380,3 +383,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/portable/GCC/ARM_CM0/portmacro.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/mpu_wrappers.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:

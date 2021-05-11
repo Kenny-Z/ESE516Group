@@ -1,5 +1,5 @@
-src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
- ../src/I2CDriver/I2CDriver.c ../src/I2CDriver/I2cDriver.h \
+src/I2cDriver/I2cDriver.d src/I2cDriver/I2cDriver.o: \
+ ../src/I2cDriver/I2cDriver.c ../src/I2cDriver/I2cDriver.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
  ../src/ASF/sam0/utils/compiler.h \
@@ -127,6 +127,16 @@ src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/FreeRTOS.h \
  ../src/config/FreeRTOSConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/common/boards/board.h \
+ ../src/ASF/sam0/boards/samw25_xplained_pro/samw25_xplained_pro.h \
+ ../src/config/conf_board.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/portable.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/deprecated_definitions.h \
@@ -136,14 +146,24 @@ src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/queue.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/task.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/list.h \
- ../src/asf.h ../src/ASF/common/services/crc32/crc32.h \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h \
+ ../src/ASF/sam0/drivers/adc/adc_callback.h \
+ ../src/ASF/common/services/crc32/crc32.h \
+ ../src/ASF/sam0/drivers/dac/dac.h \
+ ../src/ASF/sam0/drivers/dac/dac_sam_d_c_h/dac_feature.h \
+ ../src/ASF/sam0/drivers/dac/dac_callback.h \
+ ../src/ASF/sam0/drivers/dac/dac.h ../src/ASF/sam0/drivers/dma/dma.h \
+ ../src/config/conf_dma.h ../src/ASF/sam0/drivers/dma/dma_crc.h \
  ../src/ASF/common/services/freertos/dbg_print/dbg_print.h \
- ../src/config/conf_dbg_print.h ../src/ASF/common/boards/board.h \
- ../src/ASF/sam0/boards/samw25_xplained_pro/samw25_xplained_pro.h \
- ../src/config/conf_board.h \
+ ../src/config/conf_dbg_print.h \
  ../src/ASF/common/services/freertos/dbg_print/quick_start_basic/qs_dbg_print_basic.h \
  ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
+ ../src/ASF/sam0/drivers/events/events.h \
+ ../src/ASF/sam0/drivers/events/events_common.h \
+ ../src/ASF/sam0/drivers/events/events_hooks.h \
+ ../src/ASF/sam0/drivers/events/events.h \
  ../src/ASF/sam0/drivers/extint/extint.h \
  ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/sam0/drivers/extint/extint_callback.h \
@@ -170,11 +190,29 @@ src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/stack_macros.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/stream_buffer.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/timers.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h \
+ ../src/config/conf_menu.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_ug_2832hsweg04.h \
+ ../src/ASF/common2/components/display/ssd1306/ssd1306.h \
+ ../src/ASF/sam0/drivers/port/port.h \
+ ../src/ASF/sam0/drivers/sercom/spi/spi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../src/config/conf_spi.h ../src/config/conf_ssd1306.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_spinctrl.h \
+ ../src/config/conf_spinctrl.h \
+ ../src/ASF/common2/services/gfx_mono/sysfont.h \
+ ../src/config/conf_sysfont.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_text.h \
  ../src/ASF/common/services/storage/ctrl_access/ctrl_access.h \
  ../src/config/conf_access.h \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc_mem.h \
  ../src/ASF/sam0/drivers/nvm/nvm.h ../src/ASF/sam0/drivers/pac/pac.h \
- ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h \
@@ -182,11 +220,6 @@ src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc.h \
  ../src/config/conf_sd_mmc.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
- ../src/ASF/sam0/drivers/sercom/spi/spi.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../src/config/conf_spi.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
@@ -205,7 +238,7 @@ src/I2CDriver/I2CDriver.d src/I2CDriver/I2CDriver.o: \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
  ../src/ASF/sam0/drivers/tcc/tcc.h
 
-../src/I2CDriver/I2cDriver.h:
+../src/I2cDriver/I2cDriver.h:
 
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h:
 
@@ -463,6 +496,26 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/FreeRTOSConfig.h:
 
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/common/boards/board.h:
+
+../src/ASF/sam0/boards/samw25_xplained_pro/samw25_xplained_pro.h:
+
+../src/config/conf_board.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h:
+
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/portable.h:
@@ -483,23 +536,45 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/asf.h:
 
+../src/ASF/sam0/drivers/adc/adc.h:
+
+../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h:
+
+../src/ASF/sam0/drivers/adc/adc_callback.h:
+
 ../src/ASF/common/services/crc32/crc32.h:
+
+../src/ASF/sam0/drivers/dac/dac.h:
+
+../src/ASF/sam0/drivers/dac/dac_sam_d_c_h/dac_feature.h:
+
+../src/ASF/sam0/drivers/dac/dac_callback.h:
+
+../src/ASF/sam0/drivers/dac/dac.h:
+
+../src/ASF/sam0/drivers/dma/dma.h:
+
+../src/config/conf_dma.h:
+
+../src/ASF/sam0/drivers/dma/dma_crc.h:
 
 ../src/ASF/common/services/freertos/dbg_print/dbg_print.h:
 
 ../src/config/conf_dbg_print.h:
-
-../src/ASF/common/boards/board.h:
-
-../src/ASF/sam0/boards/samw25_xplained_pro/samw25_xplained_pro.h:
-
-../src/config/conf_board.h:
 
 ../src/ASF/common/services/freertos/dbg_print/quick_start_basic/qs_dbg_print_basic.h:
 
 ../src/ASF/common2/services/delay/delay.h:
 
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
+
+../src/ASF/sam0/drivers/events/events.h:
+
+../src/ASF/sam0/drivers/events/events_common.h:
+
+../src/ASF/sam0/drivers/events/events_hooks.h:
+
+../src/ASF/sam0/drivers/events/events.h:
 
 ../src/ASF/sam0/drivers/extint/extint.h:
 
@@ -553,6 +628,46 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/timers.h:
 
+../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h:
+
+../src/config/conf_menu.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_ug_2832hsweg04.h:
+
+../src/ASF/common2/components/display/ssd1306/ssd1306.h:
+
+../src/ASF/sam0/drivers/port/port.h:
+
+../src/ASF/sam0/drivers/sercom/spi/spi.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../src/config/conf_spi.h:
+
+../src/config/conf_ssd1306.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_spinctrl.h:
+
+../src/config/conf_spinctrl.h:
+
+../src/ASF/common2/services/gfx_mono/sysfont.h:
+
+../src/config/conf_sysfont.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_text.h:
+
 ../src/ASF/common/services/storage/ctrl_access/ctrl_access.h:
 
 ../src/config/conf_access.h:
@@ -562,8 +677,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/nvm/nvm.h:
 
 ../src/ASF/sam0/drivers/pac/pac.h:
-
-../src/ASF/sam0/drivers/port/port.h:
 
 ../src/ASF/sam0/drivers/rtc/rtc_calendar.h:
 
@@ -580,16 +693,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_sd_mmc.h:
 
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h:
-
-../src/ASF/sam0/drivers/sercom/spi/spi.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../src/config/conf_spi.h:
 
 ../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h:
 

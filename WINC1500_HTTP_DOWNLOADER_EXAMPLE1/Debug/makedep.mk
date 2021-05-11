@@ -2,25 +2,55 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\common2\components\display\ssd1306\ssd1306.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_framebuffer.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_generic.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_menu.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_spinctrl.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_text.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_ug_2832hsweg04.c
+
+src\ASF\common2\services\gfx_mono\sysfont.c
+
 src\ASF\common\services\crc32\crc32.c
+
+src\ASF\sam0\drivers\adc\adc_sam_d_r_h\adc.c
+
+src\ASF\sam0\drivers\adc\adc_sam_d_r_h\adc_callback.c
+
+src\ASF\sam0\drivers\dac\dac_sam_d_c_h\dac.c
+
+src\ASF\sam0\drivers\dac\dac_sam_d_c_h\dac_callback.c
+
+src\ASF\sam0\drivers\dma\dma.c
+
+src\ASF\sam0\drivers\events\events_hooks.c
+
+src\ASF\sam0\drivers\events\events_sam_d_r_h\events.c
 
 src\ASF\sam0\drivers\sercom\i2c\i2c_sam0\i2c_master_interrupt.c
 
-src\CliThread\CliThread.c
+src\FreeRTOS_Threads\CliThread\CliThread.c
 
-src\I2CDriver\I2CDriver.c
+src\FreeRTOS_Threads\ControlThread\ControlThread.c
 
-src\KeyboardDriver\SeesawDriver.c
+src\FreeRTOS_Threads\UiHandlerThread\UiHandlerThread.c
 
-src\LightSensor\VEML6030.c
+src\FreeRTOS_Threads\WifiHandlerThread\WifiHandler.c
 
-src\OLED\OLED_driver.c
+src\I2cDriver\I2cDriver.c
 
-src\Template\template.c
+src\IMU_Driver\lsm6ds_reg.c
 
-src\SensorReadThread\SensorThread.c
+src\OLED_Driver\OLED_driver.c
 
-src\WifiHandlerThread\WifiHandler.c
+src\SeesawDriver\SeesawDriver.c
 
 src\ASF\common\services\freertos\dbg_print\dbg_print.c
 
@@ -216,5 +246,5 @@ src\iot\stream_writer.c
 
 src\iot\sw_timer.c
 
-src\main21.c
+src\main.c
 

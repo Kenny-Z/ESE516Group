@@ -13,7 +13,7 @@ src/main21.d src/main21.o: ../src/main21.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h \
- ../src/asf.h ../src/ASF/common/services/crc32/crc32.h \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
  ../src/ASF/sam0/utils/compiler.h ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -110,6 +110,23 @@ src/main21.d src/main21.o: ../src/main21.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
+ ../src/ASF/sam0/drivers/system/system.h \
+ ../src/ASF/sam0/drivers/system/clock/clock.h \
+ ../src/ASF/sam0/drivers/system/clock/gclk.h \
+ ../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock_feature.h \
+ ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
+ ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
+ ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
+ ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h \
+ ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h \
+ ../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21/system_interrupt_features.h \
+ ../src/ASF/sam0/drivers/adc/adc_callback.h \
+ ../src/ASF/common/services/crc32/crc32.h \
+ ../src/ASF/sam0/drivers/dac/dac.h \
+ ../src/ASF/sam0/drivers/dac/dac_sam_d_c_h/dac_feature.h \
+ ../src/ASF/sam0/drivers/dac/dac_callback.h \
+ ../src/ASF/sam0/drivers/dac/dac.h ../src/ASF/sam0/drivers/dma/dma.h \
+ ../src/config/conf_dma.h ../src/ASF/sam0/drivers/dma/dma_crc.h \
  ../src/ASF/common/services/freertos/dbg_print/dbg_print.h \
  ../src/config/conf_dbg_print.h ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samw25_xplained_pro/samw25_xplained_pro.h \
@@ -117,11 +134,11 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/common/services/freertos/dbg_print/quick_start_basic/qs_dbg_print_basic.h \
  ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
- ../src/ASF/sam0/drivers/system/clock/clock.h \
- ../src/ASF/sam0/drivers/system/clock/gclk.h \
- ../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock_feature.h \
+ ../src/ASF/sam0/drivers/events/events.h \
+ ../src/ASF/sam0/drivers/events/events_common.h \
+ ../src/ASF/sam0/drivers/events/events_hooks.h \
+ ../src/ASF/sam0/drivers/events/events.h \
  ../src/ASF/sam0/drivers/extint/extint.h \
- ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
  ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/thirdparty/fatfs/fatfs-r0.09/src/diskio.h \
@@ -133,6 +150,13 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/thirdparty/fatfs/fatfs-r0.09/src/integer.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/FreeRTOS.h \
  ../src/config/FreeRTOSConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h \
+ ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/portable.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/deprecated_definitions.h \
@@ -158,35 +182,44 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/stream_buffer.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/task.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/timers.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h \
+ ../src/config/conf_menu.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_ug_2832hsweg04.h \
+ ../src/ASF/common2/components/display/ssd1306/ssd1306.h \
+ ../src/ASF/sam0/drivers/port/port.h \
+ ../src/ASF/sam0/drivers/sercom/spi/spi.h \
+ ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../src/config/conf_spi.h \
+ ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
+ ../src/ASF/sam0/drivers/sercom/sercom.h ../src/config/conf_ssd1306.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_spinctrl.h \
+ ../src/config/conf_spinctrl.h \
+ ../src/ASF/common2/services/gfx_mono/sysfont.h \
+ ../src/config/conf_sysfont.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_text.h \
  ../src/ASF/common/services/storage/ctrl_access/ctrl_access.h \
  ../src/config/conf_access.h \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc_mem.h \
  ../src/ASF/sam0/drivers/nvm/nvm.h ../src/ASF/sam0/drivers/pac/pac.h \
- ../src/ASF/sam0/drivers/system/system.h \
- ../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h \
- ../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h \
- ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
- ../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h \
- ../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21/system_interrupt_features.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h \
  ../src/ASF/sam0/drivers/rtc/rtc_tamper.h \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc.h \
- ../src/config/conf_sd_mmc.h ../src/ASF/sam0/drivers/sercom/sercom.h \
- ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
- ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/config/conf_sd_mmc.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h \
- ../src/ASF/sam0/drivers/sercom/spi/spi.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../src/config/conf_spi.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
@@ -204,8 +237,7 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/ASF/sam0/drivers/tcc/tcc.h \
  ../src/ASF/sam0/drivers/tcc/tcc_callback.h \
  ../src/ASF/sam0/drivers/tcc/tcc.h ../src/main.h \
- ../src/I2CDriver/I2CDriver.h ../src/asf.h \
- ../src/SerialConsole/SerialConsole.h \
+ ../src/SerialConsole/SerialConsole.h ../src/asf.h \
  ../src/SerialConsole/circular_buffer.h \
  ../src/ASF/common/components/wifi/winc1500/driver/include/m2m_wifi.h \
  ../src/ASF/common/components/wifi/winc1500/common/include/nm_common.h \
@@ -219,9 +251,11 @@ src/main21.d src/main21.o: ../src/main21.c \
  ../src/ASF/common/components/wifi/winc1500/driver/source/nmdrv.h \
  ../src/CliThread/CliThread.h \
  ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h \
- ../src/OLED/OLED_driver.h ../src/I2cDriver/I2cDriver.h \
- ../src/WifiHandlerThread/WifiHandler.h \
- ../src/SensorReadThread/SensorThread.h ../src/LightSensor/VEML6030.h \
+ ../src/WifiHandlerThread/WifiHandler.h ../src/SeesawDriver/Seesaw.h \
+ ../src/I2cDriver/I2cDriver.h ../src/IMU\lsm6ds_reg.h \
+ ../src/DistanceDriver\DistanceSensor.h \
+ ../src/UiHandlerThread\UiHandlerThread.h \
+ ../src/ControlThread\ControlThread.h \
  ../src/ASF/thirdparty/pahomqtt/MQTTClient/Platforms/MCHP_ATWx.h \
  ../src/ASF/common/components/wifi/winc1500/socket/include/socket.h
 
@@ -255,7 +289,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/asf.h:
 
-../src/ASF/common/services/crc32/crc32.h:
+../src/ASF/sam0/drivers/adc/adc.h:
 
 ../src/ASF/sam0/utils/compiler.h:
 
@@ -451,6 +485,44 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h:
 
+../src/ASF/sam0/drivers/system/system.h:
+
+../src/ASF/sam0/drivers/system/clock/clock.h:
+
+../src/ASF/sam0/drivers/system/clock/gclk.h:
+
+../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock_feature.h:
+
+../src/ASF/sam0/drivers/system/pinmux/pinmux.h:
+
+../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
+
+../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
+
+../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h:
+
+../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h:
+
+../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21/system_interrupt_features.h:
+
+../src/ASF/sam0/drivers/adc/adc_callback.h:
+
+../src/ASF/common/services/crc32/crc32.h:
+
+../src/ASF/sam0/drivers/dac/dac.h:
+
+../src/ASF/sam0/drivers/dac/dac_sam_d_c_h/dac_feature.h:
+
+../src/ASF/sam0/drivers/dac/dac_callback.h:
+
+../src/ASF/sam0/drivers/dac/dac.h:
+
+../src/ASF/sam0/drivers/dma/dma.h:
+
+../src/config/conf_dma.h:
+
+../src/ASF/sam0/drivers/dma/dma_crc.h:
+
 ../src/ASF/common/services/freertos/dbg_print/dbg_print.h:
 
 ../src/config/conf_dbg_print.h:
@@ -467,15 +539,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
-../src/ASF/sam0/drivers/system/clock/clock.h:
+../src/ASF/sam0/drivers/events/events.h:
 
-../src/ASF/sam0/drivers/system/clock/gclk.h:
+../src/ASF/sam0/drivers/events/events_common.h:
 
-../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock_feature.h:
+../src/ASF/sam0/drivers/events/events_hooks.h:
+
+../src/ASF/sam0/drivers/events/events.h:
 
 ../src/ASF/sam0/drivers/extint/extint.h:
-
-../src/ASF/sam0/drivers/system/pinmux/pinmux.h:
 
 ../src/ASF/sam0/drivers/extint/extint_callback.h:
 
@@ -498,6 +570,20 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/FreeRTOS.h:
 
 ../src/config/FreeRTOSConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcRecorder.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/config/trcSnapshotConfig.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcPortDefines.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcHardwarePort.h:
+
+../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-Trace/Include/trcKernelPort.h:
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/projdefs.h:
 
@@ -549,6 +635,54 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/include/timers.h:
 
+../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h:
+
+../src/config/conf_menu.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_ug_2832hsweg04.h:
+
+../src/ASF/common2/components/display/ssd1306/ssd1306.h:
+
+../src/ASF/sam0/drivers/port/port.h:
+
+../src/ASF/sam0/drivers/sercom/spi/spi.h:
+
+../src/ASF/sam0/drivers/sercom/sercom.h:
+
+../src/ASF/sam0/drivers/sercom/sercom_pinout.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../src/config/conf_spi.h:
+
+../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
+
+../src/ASF/sam0/drivers/sercom/sercom.h:
+
+../src/config/conf_ssd1306.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_spinctrl.h:
+
+../src/config/conf_spinctrl.h:
+
+../src/ASF/common2/services/gfx_mono/sysfont.h:
+
+../src/config/conf_sysfont.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_text.h:
+
 ../src/ASF/common/services/storage/ctrl_access/ctrl_access.h:
 
 ../src/config/conf_access.h:
@@ -559,21 +693,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/pac/pac.h:
 
-../src/ASF/sam0/drivers/system/system.h:
-
-../src/ASF/sam0/drivers/system/power/power_sam_d_r_h/power.h:
-
-../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h/reset.h:
-
-../src/ASF/sam0/drivers/port/port.h:
-
 ../src/ASF/sam0/drivers/rtc/rtc_calendar.h:
 
 ../src/config/conf_clocks.h:
-
-../src/ASF/sam0/drivers/system/interrupt/system_interrupt.h:
-
-../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21/system_interrupt_features.h:
 
 ../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.h:
 
@@ -585,14 +707,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_sd_mmc.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
-
-../src/ASF/sam0/drivers/sercom/sercom_pinout.h:
-
-../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
-
-../src/ASF/sam0/drivers/sercom/sercom.h:
-
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h:
 
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h:
@@ -602,16 +716,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_master_interrupt.h:
 
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h:
-
-../src/ASF/sam0/drivers/sercom/spi/spi.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
-
-../src/config/conf_spi.h:
 
 ../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h:
 
@@ -651,11 +755,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/main.h:
 
-../src/I2CDriver/I2CDriver.h:
+../src/SerialConsole/SerialConsole.h:
 
 ../src/asf.h:
-
-../src/SerialConsole/SerialConsole.h:
 
 ../src/SerialConsole/circular_buffer.h:
 
@@ -685,15 +787,19 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/freertos/freertos-10.0.0/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h:
 
-../src/OLED/OLED_driver.h:
+../src/WifiHandlerThread/WifiHandler.h:
+
+../src/SeesawDriver/Seesaw.h:
 
 ../src/I2cDriver/I2cDriver.h:
 
-../src/WifiHandlerThread/WifiHandler.h:
+../src/IMU\lsm6ds_reg.h:
 
-../src/SensorReadThread/SensorThread.h:
+../src/DistanceDriver\DistanceSensor.h:
 
-../src/LightSensor/VEML6030.h:
+../src/UiHandlerThread\UiHandlerThread.h:
+
+../src/ControlThread\ControlThread.h:
 
 ../src/ASF/thirdparty/pahomqtt/MQTTClient/Platforms/MCHP_ATWx.h:
 

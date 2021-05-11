@@ -53,11 +53,11 @@ void assert_triggered( const char * file, uint32_t line );
 #define configCPU_CLOCK_HZ                      ( system_gclk_gen_get_hz(GCLK_GENERATOR_0) )
 #define configTICK_RATE_HZ                      ( ( portTickType ) 1000 )
 #define configMAX_PRIORITIES                    ( 5 )
-#define configMINIMAL_STACK_SIZE                ( ( unsigned short ) 500)
+#define configMINIMAL_STACK_SIZE                ( ( unsigned short ) 100)
 /* configTOTAL_HEAP_SIZE is not used when heap_3.c is used. */
-#define configTOTAL_HEAP_SIZE                   ( ( size_t ) ( 10000 ) )
+#define configTOTAL_HEAP_SIZE                   ( ( size_t ) ( 12000 ) )
 #define configMAX_TASK_NAME_LEN                 ( 8 )
-#define configUSE_TRACE_FACILITY                0
+#define configUSE_TRACE_FACILITY                1
 #define configUSE_16_BIT_TICKS                  0
 #define configIDLE_SHOULD_YIELD                 1
 #define configUSE_MUTEXES                       1
@@ -78,7 +78,7 @@ void assert_triggered( const char * file, uint32_t line );
 /* Software timer definitions. */
 #define configUSE_TIMERS                        1
 #define configTIMER_TASK_PRIORITY               ( 2 )
-#define configTIMER_QUEUE_LENGTH                2
+#define configTIMER_QUEUE_LENGTH                5
 #define configTIMER_TASK_STACK_DEPTH            ( 128 )
 
 /* Set the following definitions to 1 to include the API function, or zero
@@ -92,7 +92,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelay                      1
 #define INCLUDE_xTaskGetSchedulerState          1
 #define INCLUDE_xTaskGetCurrentTaskHandle       1
-#define INCLUDE_uxTaskGetStackHighWaterMark     0
+#define INCLUDE_uxTaskGetStackHighWaterMark     1
 #define INCLUDE_xTaskGetIdleTaskHandle          0
 #define INCLUDE_xTimerGetTimerDaemonTaskHandle  0
 #define INCLUDE_pcTaskGetTaskName               0
@@ -111,5 +111,5 @@ standard names - or at least those used in the unmodified vector table. */
 #define xPortSysTickHandler                     SysTick_Handler
 
 #define configCOMMAND_INT_MAX_OUTPUT_SIZE 32
-
+#include "trcRecorder.h"
 #endif /* FREERTOS_CONFIG_H */

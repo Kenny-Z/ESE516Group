@@ -50,8 +50,10 @@ static void configure_nvm(void);
 //INITIALIZE VARIABLES
 char test_file_name[] = "0:sd_mmc_test.txt";	///<Test TEXT File name
 char test_bin_file[] = "0:sd_binary.bin";	///<Test BINARY File name
-const char A_bin_file[] = "TestA.bin";	///<Test BINARY File name
-const char B_bin_file[] = "TestB.bin";	///<Test BINARY File name
+const char firmware_bin_file[] = "0:IoT.bin";	///<Test BINARY File name
+const char Goldenfirmware_bin_file[] = "0:Golden.bin";	///<Test BINARY File name
+char updateflag_file_name[] = "0:Update.txt";
+char goldenflag_file_name[] = "0:Golden.txt";
 Ctrl_status status; ///<Holds the status of a system initialization
 FRESULT res; //Holds the result of the FATFS functions done on the SD CARD TEST
 FATFS fs; //Holds the File System of the SD CARD
@@ -80,7 +82,7 @@ int main(void)
 	InitializeSerialConsole();
 	system_interrupt_enable_global();
 	/* Initialize SD MMC stack */
-	//sd_mmc_init();
+	sd_mmc_init();
 
 	//Initialize the NVM driver
 	configure_nvm();
@@ -102,33 +104,34 @@ int main(void)
 	//See function inside to see how to open a file
 	SerialConsoleWriteString("\x0C\n\r-- SD/MMC Card Example on FatFs --\n\r");
 
-// 	if(StartFilesystemAndTest() == false)
-// 	{
-// 		SerialConsoleWriteString("SD CARD failed! Check your connections. System will restart in 5 seconds...");
-// 		delay_cycles_ms(5000);
-// 		system_reset();
-// 	}
-// 	else
-// 	{
-// 		SerialConsoleWriteString("SD CARD mount success! Filesystem also mounted. \r\n");
-// 	}
+	if(StartFilesystemAndTest() == false)
+	{
+		SerialConsoleWriteString("SD CARD failed! Check your connections. System will restart in 5 seconds...");
+		delay_cycles_ms(5000);
+		system_reset();
+	}
+	else
+	{
+		SerialConsoleWriteString("SD CARD mount success! Filesystem also mounted. \r\n");
+	}
 
 	/*END SIMPLE SD CARD MOUNTING AND TEST!*/
 
 	/*3.) STARTS BOOTLOADER HERE!*/
-// 	if (FR_OK == f_open(&file_object, "FlagA.txt", FA_READ)) // if find flag A
-// 	{
-// 		f_close(&file_object);
-// 		while (STATUS_OK != ReadBinFromSDCard(A_bin_file));
-// 		f_unlink("FlagA.txt");
-// 	}
-// 	else if (FR_OK == f_open(&file_object, "FlagB.txt", FA_READ)) // if find flag B
-// 	{
-// 		f_close(&file_object);
-// 		while (STATUS_OK != ReadBinFromSDCard(B_bin_file));
-// 		f_unlink("FlagB.txt");
-// 	}
-
+	updateflag_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
+	if (FR_OK == f_open(&file_object, updateflag_file_name, FA_READ)) // if find flag Update
+	{
+		f_close(&file_object);
+		while (STATUS_OK != ReadBinFromSDCard(firmware_bin_file));
+		f_unlink(updateflag_file_name);
+		f_unlink(firmware_bin_file);
+	}
+	else if (FR_OK == f_open(&file_object, goldenflag_file_name, FA_READ)) // if find flag Golden
+	{
+		f_close(&file_object);
+		while (STATUS_OK != ReadBinFromSDCard(Goldenfirmware_bin_file));
+		f_unlink(goldenflag_file_name);
+	}
 	/*END BOOTLOADER HERE!*/
 
 	//4.) DEINITIALIZE HW AND JUMP TO MAIN APPLICATION!
@@ -137,7 +140,7 @@ int main(void)
 		
 	//Deinitialize HW - deinitialize started HW here!
 	DeinitializeSerialConsole(); //Deinitializes UART
-	//sd_mmc_deinit(); //Deinitialize SD CARD
+	sd_mmc_deinit(); //Deinitialize SD CARD
 
 
 	//Jump to application
@@ -180,6 +183,11 @@ static uint8_t ReadBinFromSDCard(const char* bin_file_name)
 	if (res != FR_OK)
 	{
 		SerialConsoleWriteString("Could not open test file!\r\n");
+	}
+	else
+	{
+		snprintf(helpStr, 63,"Start Reading file name: %c\r\n", bin_file_name);
+		SerialConsoleWriteString(helpStr);
 	}
 	uint32_t numBytesRead = 1;
 	int row = 0;
@@ -244,6 +252,11 @@ static uint8_t ReadBinFromSDCard(const char* bin_file_name)
 			snprintf(helpStr, 63,"CRC Error!! SD CARD: %d NVM: %d \r\n", resultCrcNvm, resultCrcSd);
 			SerialConsoleWriteString(helpStr);
 			return STATUS_ERR_BAD_DATA;
+		}
+		else
+		{
+			snprintf(helpStr, 63,"Page Write Success, Current Row: %d \r\n", row);
+			SerialConsoleWriteString(helpStr);		
 		}
 		row ++;
 	}
