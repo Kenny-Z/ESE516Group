@@ -76,7 +76,7 @@ void vControlHandlerTask( void *pvParameters )
 			case (CONTROL_WAIT_FOR_STATUS):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
 				uint8_t gamestatus;
-				if(pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 0 ))
+				if(pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
 				{
 					switch (gamestatus){
 // 						case Initialize:{
@@ -86,8 +86,9 @@ void vControlHandlerTask( void *pvParameters )
 // 						}
 						case P2_turn:{
 							#ifdef PLAYER1
-								controlState = CONTROL_WAIT_FOR_STATUS;
-							#else
+								controlState = CONTROL_WAIT_FOR_STATUS;	
+							#endif
+							#ifdef PLAYER2
 								controlState = CONTROL_WAIT_FOR_GAME;	
 							#endif
 							break;							
@@ -96,17 +97,17 @@ void vControlHandlerTask( void *pvParameters )
 							#ifdef PLAYER1
 							//start to receive MQTT msg from P2
 							controlState = CONTROL_WAIT_FOR_GAME;
-							#else
-							//standby wait for further status
-							controlState = CONTROL_WAIT_FOR_STATUS;
 							#endif
+							#ifdef PLAYER2
+								controlState = CONTROL_WAIT_FOR_STATUS;	
+							#endif
+
 							break;
 						}
 						case P1_Lose:{
 						// OLED PRINT YOU LOSE // End game
 						#ifdef PLAYER1
 						//LED Display Lose
-						#else
 						//LED Display WIN
 						#endif
 						
@@ -116,7 +117,6 @@ void vControlHandlerTask( void *pvParameters )
 						case P2_Lose:{
 						#ifdef PLAYER1
 						//LED Display WIN
-						#else
 						//LED Display LOSE
 						#endif
 						controlState = CONTROL_WAIT_FOR_STATUS;
@@ -134,7 +134,7 @@ void vControlHandlerTask( void *pvParameters )
 			case (CONTROL_WAIT_FOR_GAME):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
 				struct GameDataPacket gamePacketIn;
-				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 0 ))
+				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
 				{
 					LogMessage(LOG_DEBUG_LVL, "Control Thread: Consumed game packet!\r\n");
 					UiOrderShowMoves(&gamePacketIn);
@@ -154,7 +154,7 @@ void vControlHandlerTask( void *pvParameters )
 					{
 						LogMessage(LOG_DEBUG_LVL, "Control Thread: Could not send game packet!\r\n");
 					}
-					controlState = CONTROL_WAIT_FOR_GAME;
+					controlState = CONTROL_WAIT_FOR_STATUS;
 				}
 
 				break;

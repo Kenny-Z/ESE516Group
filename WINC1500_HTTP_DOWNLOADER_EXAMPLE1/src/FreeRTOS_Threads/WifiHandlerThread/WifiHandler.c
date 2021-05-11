@@ -746,27 +746,27 @@ void SubscribeHandlerGameTopic(MessageData *msgData)
 // }
 
 
-void SubscribeHandler(MessageData *msgData)
-{
-	/* You received publish message which you had subscribed. */
-	/* Print Topic and message */
-	LogMessage(LOG_DEBUG_LVL,"\r\n %.*s",msgData->topicName->lenstring.len,msgData->topicName->lenstring.data);
-	LogMessage(LOG_DEBUG_LVL," >> ");
-	LogMessage(LOG_DEBUG_LVL,"%.*s",msgData->message->payloadlen,(char *)msgData->message->payload);	
-
-	//Handle LedData message
-	if(strncmp((char *) msgData->topicName->lenstring.data, LED_TOPIC, msgData->message->payloadlen) == 0)
-	{
-		if(strncmp((char *)msgData->message->payload, LED_TOPIC_LED_OFF, msgData->message->payloadlen) == 0)
-		{
-			port_pin_set_output_level(LED_0_PIN, LED_0_INACTIVE);
-		} 
-		else if (strncmp((char *)msgData->message->payload, LED_TOPIC_LED_ON, msgData->message->payloadlen) == 0)
-		{
-			port_pin_set_output_level(LED_0_PIN, LED_0_ACTIVE);
-		}
-	}
-}
+// void SubscribeHandler(MessageData *msgData)
+// {
+// 	/* You received publish message which you had subscribed. */
+// 	/* Print Topic and message */
+// 	LogMessage(LOG_DEBUG_LVL,"\r\n %.*s",msgData->topicName->lenstring.len,msgData->topicName->lenstring.data);
+// 	LogMessage(LOG_DEBUG_LVL," >> ");
+// 	LogMessage(LOG_DEBUG_LVL,"%.*s",msgData->message->payloadlen,(char *)msgData->message->payload);	
+// 
+// 	//Handle LedData message
+// 	if(strncmp((char *) msgData->topicName->lenstring.data, LED_TOPIC, msgData->message->payloadlen) == 0)
+// 	{
+// 		if(strncmp((char *)msgData->message->payload, LED_TOPIC_LED_OFF, msgData->message->payloadlen) == 0)
+// 		{
+// 			port_pin_set_output_level(LED_0_PIN, LED_0_INACTIVE);
+// 		} 
+// 		else if (strncmp((char *)msgData->message->payload, LED_TOPIC_LED_ON, msgData->message->payloadlen) == 0)
+// 		{
+// 			port_pin_set_output_level(LED_0_PIN, LED_0_ACTIVE);
+// 		}
+// 	}
+// }
 
 
 /**
@@ -812,8 +812,8 @@ static void mqtt_callback(struct mqtt_module *module_inst, int type, union mqtt_
 	case MQTT_CALLBACK_CONNECTED:
 		if (data->connected.result == MQTT_CONN_RESULT_ACCEPT) {
 			/* Subscribe chat topic. */
-			mqtt_subscribe(module_inst, GAME_TOPIC_IN, 2, SubscribeHandlerGameTopic);
-			mqtt_subscribe(module_inst, STATUS_TOPIC, 2, SubscribeHandlerStatusTopic);
+			mqtt_subscribe(module_inst, GAME_TOPIC_IN, 0, SubscribeHandlerGameTopic);
+			mqtt_subscribe(module_inst, STATUS_TOPIC, 0, SubscribeHandlerStatusTopic);
 			//mqtt_subscribe(module_inst, IMU_TOPIC, 2, SubscribeHandlerImuTopic);
 			//mqtt_subscribe(module_inst, DISTANCE_TOPIC, 2, SubscribeHandlerDistanceTopic);
 			/* Enable USART receiving callback. */
