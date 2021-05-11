@@ -85,20 +85,40 @@ void vControlHandlerTask( void *pvParameters )
 // 							break;
 // 						}
 						case P2_turn:{
-							controlState = CONTROL_WAIT_FOR_STATUS;
+							#ifdef PLAYER1
+								controlState = CONTROL_WAIT_FOR_STATUS;
+							#else
+								controlState = CONTROL_WAIT_FOR_GAME;	
+							#endif
 							break;							
 						}
 						case P1_turn:{	// OLED PRINT YOUR TURN
-							controlState = CONTROL_WAIT_FOR_GAME;	
+							#ifdef PLAYER1
+							//start to receive MQTT msg from P2
+							controlState = CONTROL_WAIT_FOR_GAME;
+							#else
+							//standby wait for further status
+							controlState = CONTROL_WAIT_FOR_STATUS;
+							#endif
 							break;
 						}
 						case P1_Lose:{
 						// OLED PRINT YOU LOSE // End game
+						#ifdef PLAYER1
+						//LED Display Lose
+						#else
+						//LED Display WIN
+						#endif
+						
 						controlState = CONTROL_WAIT_FOR_STATUS;
 						break;
 						}
 						case P2_Lose:{
-						// OLED PRINT YOU WIN // End game
+						#ifdef PLAYER1
+						//LED Display WIN
+						#else
+						//LED Display LOSE
+						#endif
 						controlState = CONTROL_WAIT_FOR_STATUS;
 						break;
 						}

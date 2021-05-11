@@ -94,18 +94,18 @@ struct RgbColorPacket
 /* Limitation of user name. */
 #define MAIN_CHAT_USER_NAME_SIZE 64
 
-#define PLAYER1 1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
+#define PLAYER1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
 
 #ifdef PLAYER1
 /* Chat MQTT topic. */
-#define LED_TOPIC			"P1_LED_VoodooMagic_T0"	//Students to change to an unique identifier for each device! LED Data
+//#define LED_TOPIC			"P1_LED_VoodooMagic_T0"	//Students to change to an unique identifier for each device! LED Data
 #define GAME_TOPIC_IN			"P1_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
 #define GAME_TOPIC_OUT			"P2_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
 #define STATUS_TOPIC			"P1_Satus_VoodooMagic_T0" //Students to change to an unique identifier for each device! IMU Data
 
 #else
 /* Chat MQTT topic. */
-#define LED_TOPIC			"P2_LED_ESE516_T0"	//Students to change to an unique identifier for each device! LED Data
+//#define LED_TOPIC			"P2_LED_ESE516_T0"	//Students to change to an unique identifier for each device! LED Data
 #define GAME_TOPIC_IN			"P2_GAME_ESE516_T0" //Students to change to an unique identifier for each device! Game Data
 #define GAME_TOPIC_OUT			"P1_GAME_ESE516_T0" //Students to change to an unique identifier for each device! Game Data
 #define STATUS_TOPIC			"P1_Satus_VoodooMagic_T0" //Students to change to an unique identifier for each device! IMU Data
