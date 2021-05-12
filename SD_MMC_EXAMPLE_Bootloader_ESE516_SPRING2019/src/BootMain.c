@@ -82,7 +82,7 @@ int main(void)
 	InitializeSerialConsole();
 	system_interrupt_enable_global();
 	/* Initialize SD MMC stack */
-	sd_mmc_init();
+	//sd_mmc_init();
 
 	//Initialize the NVM driver
 	configure_nvm();
@@ -100,38 +100,38 @@ int main(void)
 
 	/*2.) STARTS SIMPLE SD CARD MOUNTING AND TEST!*/
 
-	//EXAMPLE CODE ON MOUNTING THE SD CARD AND WRITING TO A FILE
-	//See function inside to see how to open a file
-	SerialConsoleWriteString("\x0C\n\r-- SD/MMC Card Example on FatFs --\n\r");
-
-	if(StartFilesystemAndTest() == false)
-	{
-		SerialConsoleWriteString("SD CARD failed! Check your connections. System will restart in 5 seconds...");
-		delay_cycles_ms(5000);
-		system_reset();
-	}
-	else
-	{
-		SerialConsoleWriteString("SD CARD mount success! Filesystem also mounted. \r\n");
-	}
+// 	//EXAMPLE CODE ON MOUNTING THE SD CARD AND WRITING TO A FILE
+// 	//See function inside to see how to open a file
+// 	SerialConsoleWriteString("\x0C\n\r-- SD/MMC Card Example on FatFs --\n\r");
+// 
+// 	if(StartFilesystemAndTest() == false)
+// 	{
+// 		SerialConsoleWriteString("SD CARD failed! Check your connections. System will restart in 5 seconds...");
+// 		delay_cycles_ms(5000);
+// 		system_reset();
+// 	}
+// 	else
+// 	{
+// 		SerialConsoleWriteString("SD CARD mount success! Filesystem also mounted. \r\n");
+// 	}
 
 	/*END SIMPLE SD CARD MOUNTING AND TEST!*/
 
 	/*3.) STARTS BOOTLOADER HERE!*/
-	updateflag_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
-	if (FR_OK == f_open(&file_object, updateflag_file_name, FA_READ)) // if find flag Update
-	{
-		f_close(&file_object);
-		while (STATUS_OK != ReadBinFromSDCard(firmware_bin_file));
-		f_unlink(updateflag_file_name);
-		f_unlink(firmware_bin_file);
-	}
-	else if (FR_OK == f_open(&file_object, goldenflag_file_name, FA_READ)) // if find flag Golden
-	{
-		f_close(&file_object);
-		while (STATUS_OK != ReadBinFromSDCard(Goldenfirmware_bin_file));
-		f_unlink(goldenflag_file_name);
-	}
+// 	updateflag_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
+// 	if (FR_OK == f_open(&file_object, updateflag_file_name, FA_READ)) // if find flag Update
+// 	{
+// 		f_close(&file_object);
+// 		while (STATUS_OK != ReadBinFromSDCard(firmware_bin_file));
+// 		f_unlink(updateflag_file_name);
+// 		f_unlink(firmware_bin_file);
+// 	}
+// 	else if (FR_OK == f_open(&file_object, goldenflag_file_name, FA_READ)) // if find flag Golden
+// 	{
+// 		f_close(&file_object);
+// 		while (STATUS_OK != ReadBinFromSDCard(Goldenfirmware_bin_file));
+// 		f_unlink(goldenflag_file_name);
+// 	}
 	/*END BOOTLOADER HERE!*/
 
 	//4.) DEINITIALIZE HW AND JUMP TO MAIN APPLICATION!
@@ -140,7 +140,7 @@ int main(void)
 		
 	//Deinitialize HW - deinitialize started HW here!
 	DeinitializeSerialConsole(); //Deinitializes UART
-	sd_mmc_deinit(); //Deinitialize SD CARD
+//	sd_mmc_deinit(); //Deinitialize SD CARD
 
 
 	//Jump to application

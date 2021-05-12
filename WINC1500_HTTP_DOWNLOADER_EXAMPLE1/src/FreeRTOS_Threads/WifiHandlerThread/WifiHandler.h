@@ -31,9 +31,9 @@
 	 #define WIFI_PRIORITY (configMAX_PRIORITIES - 2) 
 	 
 /** Wi-Fi AP Settings. */
-#define MAIN_WLAN_SSID                       "YAN" /**< Destination SSID. Change to your WIFI SSID */
+#define MAIN_WLAN_SSID                       "KennyAndKira" /**< Destination SSID. Change to your WIFI SSID */
 #define MAIN_WLAN_AUTH                       M2M_WIFI_SEC_WPA_PSK /**< Security manner */
-#define MAIN_WLAN_PSK                        "wazxdewazxde" /**< Password for Destination SSID. Change to your password. Please dont hack my WiFi router */
+#define MAIN_WLAN_PSK                        "zwj971020Verizon" /**< Password for Destination SSID. Change to your password. Please dont hack my WiFi router */
 
 /** IP address parsing. */
 #define IPV4_BYTE(val, index)                ((val >> (index * 8)) & 0xFF)
@@ -94,7 +94,7 @@ struct RgbColorPacket
 /* Limitation of user name. */
 #define MAIN_CHAT_USER_NAME_SIZE 64
 
-//#define PLAYER1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
+#define PLAYER1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
 
 #ifdef PLAYER1
 /* Chat MQTT topic. */
@@ -116,11 +116,11 @@ struct RgbColorPacket
 #define LED_TOPIC_LED_ON	 "true"
 
 //Cloud MQTT User
-#define CLOUDMQTT_USER_ID	"voodoomagic"
+#define CLOUDMQTT_USER_ID	"voodoomagic2"
 
 
 //Cloud MQTT pASSWORD
-#define CLOUDMQTT_USER_PASSWORD	"ESE516Voodoomagic"
+#define CLOUDMQTT_USER_PASSWORD	"ESE516Voodoomagic2"
 
 #define CLOUDMQTT_PORT		1883
 

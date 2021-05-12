@@ -38,7 +38,7 @@ static int32_t I2cDriverConfigureSensorBus(void)
 	/* Initialize config structure and software module */
 	struct i2c_master_config config_i2c_master;
 	i2c_master_get_config_defaults(&config_i2c_master);
-	
+	//config_i2c_master.baud_rate = I2C_MASTER_BAUD_RATE_400KHZ;
 	config_i2c_master.pinmux_pad0 = PINMUX_PA08C_SERCOM0_PAD0;
 	config_i2c_master.pinmux_pad1 = PINMUX_PA09C_SERCOM0_PAD1;
 	/* Change buffer timeout to something longer */
@@ -215,7 +215,7 @@ int32_t I2cWriteData(I2C_Data *data){
 	
 	//Write
 
-	 hwError = i2c_master_write_packet_job(&i2cSensorBusInstance, &sensorPacketWrite);
+	hwError = i2c_master_write_packet_job(&i2cSensorBusInstance, &sensorPacketWrite);
 	
 	if(STATUS_OK != hwError)
 	{
@@ -227,7 +227,48 @@ int32_t I2cWriteData(I2C_Data *data){
 	return error;
 }
 
+/**************************************************************************//**
+ * @fn    int32_t I2cWriteData_No_Stop(I2C_Data *data)
+ * @brief       Function call to write an specified number of bytes on the given I2C bus 
+ * @details     
+ * @param[in]   data Pointer to I2C data structure which has all the information needed to send an I2C message
+ * @return      Returns an error message in case of error. See ErrCodes.h
+ * @note        
+ *****************************************************************************/
 
+int32_t I2cWriteData_No_Stop(I2C_Data *data){
+	
+	int32_t error = ERROR_NONE;
+	enum status_code hwError;
+	struct i2c_master_module *I2CBusHw = NULL;
+	I2C_Bus_State * busI2cState;
+	struct i2c_master_packet *writePacket = NULL;
+	struct i2c_master_packet *readPacket = NULL;
+	
+	//Check parameters
+	if(data == NULL || data->msgOut == NULL){
+		error = ERR_INVALID_ARG;
+		goto exit;
+	}
+
+	//Prepare to write
+	sensorPacketWrite.address = data->address;
+	sensorPacketWrite.data = (uint8_t*) data->msgOut;
+	sensorPacketWrite.data_length = data->lenOut;
+	
+	//Write
+
+	hwError = i2c_master_write_packet_job_no_stop(&i2cSensorBusInstance, &sensorPacketWrite);
+	
+	if(STATUS_OK != hwError)
+	{
+		error = ERROR_IO;
+		goto exit;
+	}
+	
+	exit:
+	return error;
+}
 /**************************************************************************//**
  * @fn    int32_t I2cReadData(I2C_Data *data)
  * @brief       Function call to read an specified number of bytes on the given I2C bus
@@ -274,19 +315,19 @@ int32_t I2cReadData(I2C_Data *data){
 
 
 /**************************************************************************//**
- * @fn			int32_t I2cFreeMutex(eI2cBuses bus)
- * @brief       Frees the mutex of the given I2C bus
+ * @fn			int32_t I2cFreeMutex(void)
+ * @brief       Frees the mutex of the given I2C bus (sensorI2cMutexHandle)
  * @details     
- * @param[in]   bus Enum that represents the bus in which we are interested to free the mutex of.
- * @return      Returns (0) if the bus is ready, (1) if it is busy.
- * @note        
+ * @param[out]   bus Enum that represents the bus in which we are interested to free the mutex of.
+ * @return      Returns (ERROR_NONE) if the bus is ready, (ERROR_NOT_INITIALIZED) if it is busy.
+ * @note        STUDENTS TO FILL OUT!
  *****************************************************************************/
 int32_t I2cFreeMutex(void){
 	
 	int32_t error = ERROR_NONE;
-	
-	if( xSemaphoreGive( sensorI2cMutexHandle ) != pdTRUE ){
-		error = ERROR_NOT_INITIALIZED;	//We could not return the mutex! We must not have it!
+	if(pdTRUE != xSemaphoreGive(sensorI2cMutexHandle))
+	{
+		error = ERROR_NOT_INITIALIZED;
 	}
 	return error;
 }
@@ -297,13 +338,13 @@ int32_t I2cFreeMutex(void){
  * @brief       Frees the mutex of the given I2C bus
  * @details     
  * @param[in]   waitTime Time to wait for the mutex to be freed.
- * @return      Returns (0) if the bus is ready, (1) if it is busy.
+ * @return      Returns (ERROR_NONE) if we got the mutex, (ERROR_NOT_READY) if we time out before we got it
  * @note        
  *****************************************************************************/
 int32_t I2cGetMutex(TickType_t waitTime){
 	
 	int32_t error = ERROR_NONE;
-	if(xSemaphoreTake( sensorI2cMutexHandle, waitTime ) != pdTRUE)
+	if(pdTRUE != xSemaphoreTake(sensorI2cMutexHandle, waitTime))
 	{
 		error = ERROR_NOT_READY;
 	}
@@ -362,7 +403,8 @@ SemaphoreHandle_t semHandle = NULL;
 
 
 //---0. Get Mutex
-error = I2cGetMutex(WAIT_I2C_LINE_MS);
+error = 0; //Students to fill out
+error = I2cGetMutex(xMaxBlockTime);
 if(ERROR_NONE != error) goto exit;
 
 
@@ -396,14 +438,14 @@ if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
 }
 
 //---8. Release Mutex
-error |= I2cFreeMutex();
-//xSemaphoreGive(semHandle);
+error = I2cFreeMutex();
+
 exit:
 return error;
 
 exitError0:
 error = I2cFreeMutex();
-//xSemaphoreGive(semHandle);
+
 return error;
 
 }
@@ -421,6 +463,7 @@ return error;
  * @param[in]   xMaxBlockTime Maximum time for the thread to wait until the I2C mutex is free.
  * @return      Returns an error message in case of error. See ErrCodes.h
  * @note        THIS IS THE FREERTOS VERSION! DO NOT Declare #define USE_FREERTOS if you wish to use the baremetal version!      
+				students to fill!
  *****************************************************************************/
 int32_t I2cReadDataWait(I2C_Data *data, const TickType_t delay, const TickType_t xMaxBlockTime){
 	int32_t error = ERROR_NONE;
@@ -428,47 +471,28 @@ int32_t I2cReadDataWait(I2C_Data *data, const TickType_t delay, const TickType_t
 	
 
 	//---0. Get Mutex
-	error = I2cGetMutex( WAIT_I2C_LINE_MS);
+	//STUDENTS FILL
+	error = 0;
+	error = I2cGetMutex(xMaxBlockTime);
 	if(ERROR_NONE != error) goto exit;
-
-
 	//---1. Get Semaphore Handle
-	error = I2cGetSemaphoreHandle( &semHandle);
+	error = I2cGetSemaphoreHandle(&semHandle);
 	if(ERROR_NONE != error) goto exit;
-
 	//---2. Initiate sending data
-
 	error = I2cWriteData(data);
 	if (ERROR_NONE != error){
 		goto exitError0;
 	}
-
-	//---2. Wait for binary semaphore to tell us that we are done!
+	//---3. Wait for binary semaphore to tell us that we are done!
 	if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
 		/* The transmission ended as expected. We now delay until the I2C sensor is finished */
 		if(I2cGetTaskErrorStatus()){
 			I2cSetTaskErrorStatus(false);
-			error = ERROR_ABORTED;
-			goto exitError0;
-		}
-		vTaskDelay( delay );
-	}else{
-		/* The call to ulTaskNotifyTake() timed out. */
-		error = ERR_TIMEOUT;
-		goto exitError0;
-	}
-	
-	//---6. Initiate Read data
-	error = I2cReadData(data);
-	if (ERROR_NONE != error){
-		goto exitError0;
-	}
-	//---7. Wait for notification
-	if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
-		/* The transmission ended as expected. We now delay until the I2C sensor is finished */
-		if(I2cGetTaskErrorStatus()){
-			I2cSetTaskErrorStatus(false);
-			error = ERROR_ABORTED;
+			if(error != ERROR_NONE){
+				error = ERROR_I2C_HANG_RESET;
+				}else{
+				error = ERROR_ABORTED;
+			}
 			goto exitError0;
 		}
 		}else{
@@ -476,16 +500,119 @@ int32_t I2cReadDataWait(I2C_Data *data, const TickType_t delay, const TickType_t
 		error = ERR_TIMEOUT;
 		goto exitError0;
 	}
+	//---6. Initiate Read data //TIP: SEE "I2cReadData", which is analogous to "I2cWriteData"
+	error = I2cReadData(data);
+	//---7. Wait for notification
+	if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
+		/* The transmission ended as expected. We now delay until the I2C sensor is finished */
+		if(I2cGetTaskErrorStatus()){
+			I2cSetTaskErrorStatus(false);
+			if(error != ERROR_NONE){
+				error = ERROR_I2C_HANG_RESET;
+				}else{
+				error = ERROR_ABORTED;
+			}
+			goto exitError0;
+		}
+		}else{
+		/* The call to ulTaskNotifyTake() timed out. */
+		error = ERR_TIMEOUT;
+		goto exitError0;
+	}	
+
 	
 	//---8. Release Mutex
 	error = I2cFreeMutex();
-	//xSemaphoreGive(semHandle);
+	
 	exit:
 	return error;
 
 	exitError0:
 	error = I2cFreeMutex();
-	//xSemaphoreGive(semHandle);
+
+	return error;
+
+	
+}
+/**************************************************************************//**
+ * @fn			int32_t I2cReadDataWait_NoStop(I2C_Data *data, const TickType_t delay, const TickType_t xMaxBlockTime)
+ * @brief       This is the main function to use to read data from an I2C device on a given I2C Bus. This function is blocking.
+				Difference from I2cReadDataWait is that the first write action will not send a stop signal.
+ * @details     This function reads data from an I2C device, by first writing to the address (I2C device address + register) and then reading the requested bytes. This
+				function is blocking (bare-metal) or it makes the current thread sleep until the I2C bus has finished the transaction (FREERTOS version).
+				On FreeRtos, this function gets the mutex for the respective I2C bus.
+ * @param[in]   data Pointer to I2C data structure which has all the information needed to send an I2C message
+ * @param[in]   delay Delay that the I2C device needs to return the response. Can be 0 if the response is ready instantly. It can be the delay an I2C device needs to make a measurement.
+ * @param[in]   xMaxBlockTime Maximum time for the thread to wait until the I2C mutex is free.
+ * @return      Returns an error message in case of error. See ErrCodes.h
+ * @note        THIS IS THE FREERTOS VERSION! DO NOT Declare #define USE_FREERTOS if you wish to use the baremetal version!      
+				students to fill!
+ *****************************************************************************/
+int32_t I2cReadDataWait_NoStop(I2C_Data *data, const TickType_t delay, const TickType_t xMaxBlockTime){
+	int32_t error = ERROR_NONE;
+	SemaphoreHandle_t semHandle = NULL;
+	
+
+	//---0. Get Mutex
+	//STUDENTS FILL
+	error = 0;
+	error = I2cGetMutex(xMaxBlockTime);
+	if(ERROR_NONE != error) goto exit;
+	//---1. Get Semaphore Handle
+	error = I2cGetSemaphoreHandle(&semHandle);
+	if(ERROR_NONE != error) goto exit;
+	//---2. Initiate sending data
+	error = I2cWriteData_No_Stop(data);
+	if (ERROR_NONE != error){
+		goto exitError0;
+	}
+	//---3. Wait for binary semaphore to tell us that we are done!
+	if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
+		/* The transmission ended as expected. We now delay until the I2C sensor is finished */
+		if(I2cGetTaskErrorStatus()){
+			I2cSetTaskErrorStatus(false);
+			if(error != ERROR_NONE){
+				error = ERROR_I2C_HANG_RESET;
+				}else{
+				error = ERROR_ABORTED;
+			}
+			goto exitError0;
+		}
+		}else{
+		/* The call to ulTaskNotifyTake() timed out. */
+		error = ERR_TIMEOUT;
+		goto exitError0;
+	}
+	//---6. Initiate Read data //TIP: SEE "I2cReadData", which is analogous to "I2cWriteData"
+	error = I2cReadData(data);
+	//---7. Wait for notification
+	if( xSemaphoreTake( semHandle, xMaxBlockTime ) == pdTRUE ){
+		/* The transmission ended as expected. We now delay until the I2C sensor is finished */
+		if(I2cGetTaskErrorStatus()){
+			I2cSetTaskErrorStatus(false);
+			if(error != ERROR_NONE){
+				error = ERROR_I2C_HANG_RESET;
+				}else{
+				error = ERROR_ABORTED;
+			}
+			goto exitError0;
+		}
+		}else{
+		/* The call to ulTaskNotifyTake() timed out. */
+		error = ERR_TIMEOUT;
+		goto exitError0;
+	}	
+
+	
+	//---8. Release Mutex
+	error = I2cFreeMutex();
+	
+	exit:
+	return error;
+
+	exitError0:
+	error = I2cFreeMutex();
+
 	return error;
 
 	

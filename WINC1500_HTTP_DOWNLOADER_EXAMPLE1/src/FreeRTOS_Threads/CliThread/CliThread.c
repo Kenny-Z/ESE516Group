@@ -11,7 +11,6 @@
 * Includes
 ******************************************************************************/
 #include "CliThread.h"
-#include "IMU_Driver/lsm6ds_reg.h"
 #include "SeesawDriver/Seesaw.h"
 #include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
 #include "OLED_driver/OLED_driver.h"

@@ -1,0 +1,155 @@
+T47EC 2630:796.983   SEGGER J-Link V7.20a Log File
+T47EC 2630:797.064   DLL Compiled: May  7 2021 16:48:29
+T47EC 2630:797.070   Logging started @ 2021-05-12 23:05
+T47EC 2630:797.075 - 6356.592ms
+T47EC 2630:797.086 JLINK_EMU_SelectByUSBSN(SerialNo = 801027258)
+T47EC 2630:800.391 - 3.316ms returns 0xFFFFFFFF
+T47EC 2630:800.410 JLINK_OpenEx(...)
+T47EC 2630:804.048   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T47EC 2630:804.121   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2630:804.154   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2630:807.575   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T47EC 2632:059.271 - 1258.871ms returns "Failed to open DLL"
+T4A74 2632:059.300 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2632:062.668 - 3.380ms returns 0
+T4A74 2632:062.692 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2632:154.501 - 91.823ms returns 0
+T47EC 2632:154.531 JLINK_ExecCommand("ProjectFile = D:\GIT\ESE516Group\WINC1500_HTTP_DOWNLOADER_EXAMPLE1\jlink.config", ...). 
+T47EC 2632:154.831 - 0.305ms returns 0x00
+T47EC 2632:154.850 JLINK_SetLogFile(...)
+T47EC 2632:154.856 - 0.007ms
+T47EC 2632:163.657 JLINK_ExecCommand("Device = ATSAMD21G18A", ...). 
+T47EC 2632:163.868   Device "ATSAMD21G18" selected.
+T47EC 2632:164.479 - 0.814ms returns 0x00
+T47EC 2632:164.490 
+  ***** 
+T47EC 2632:164.497 API Error: API JLINK_TIF_Select function called before JLINKARM_Open()
+T47EC 2632:164.506 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T47EC 2632:168.642   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T47EC 2632:168.723   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2632:168.762   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2632:171.364   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T47EC 2634:383.035 - 2218.541ms
+T47EC 2634:383.055 
+  ***** 
+T47EC 2634:383.063 API Error: API JLINK_SetSpeed function called before JLINKARM_Open()
+T4A74 2634:383.065 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2634:386.130 - 3.075ms returns 0
+T4A74 2634:386.151 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2634:476.330 - 90.206ms returns 0
+T47EC 2634:476.381 JLINK_SetSpeed(4000)
+T47EC 2634:479.886   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T47EC 2634:479.963   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2634:479.996   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2634:482.624   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T47EC 2635:437.426 - 961.055ms
+T47EC 2635:437.445 JLINK_ResetPullsRESET(OFF)
+T47EC 2635:437.451 - 0.008ms
+T47EC 2635:437.457 
+  ***** 
+T47EC 2635:437.464 API Error: API JLINK_Connect function called before JLINKARM_Open()
+T47EC 2635:437.472 JLINK_Connect()
+T47EC 2635:440.607   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T47EC 2635:440.681   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2635:440.728   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T47EC 2635:443.504   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T47EC 2635:889.909 - 452.452ms
+T4A74 2635:889.949 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2635:893.519 - 3.595ms returns 0
+T4A74 2635:893.559 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2635:984.292 - 90.748ms returns 0
+T3914 2635:984.345 JLINK_ResetPullsRESET(ON)
+T3914 2635:984.355 - 0.012ms
+T3914 2635:984.361 
+  ***** 
+T3914 2635:984.368 API Error: API JLINK_ResetNoHalt function called before JLINKARM_Open()
+T3914 2635:984.428 JLINK_ResetNoHalt()
+T3914 2635:987.666   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T3914 2635:987.735   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2635:987.772   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2635:991.382   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T3914 2636:124.724 - 140.306ms
+T3914 2636:124.747 JLINK_EMU_SelectByUSBSN(SerialNo = 801027258)
+T3914 2636:127.950 - 3.229ms returns 0xFFFFFFFF
+T3914 2636:127.988 JLINK_OpenEx(...)
+T3914 2636:132.241   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T3914 2636:132.342   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2636:132.387   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2636:136.200   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T3914 2636:873.557 - 745.582ms returns "Failed to open DLL"
+T3914 2636:873.619 JLINK_ExecCommand("ProjectFile = D:\GIT\ESE516Group\WINC1500_HTTP_DOWNLOADER_EXAMPLE1\jlink.config", ...). 
+T3914 2636:874.050 - 0.440ms returns 0x00
+T3914 2636:874.096 JLINK_SetLogFile(...)
+T3914 2636:874.126 - 0.035ms
+T3914 2636:874.315 JLINK_EMU_SelectByUSBSN(SerialNo = 801027258)
+T3914 2636:877.896 - 3.593ms returns 0xFFFFFFFF
+T3914 2636:877.917 JLINK_OpenEx(...)
+T3914 2636:881.627   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\Atmel\Studio\7.0\atbackend\JLinkGUIServer.exe
+T3914 2636:881.697   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2636:881.749   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T3914 2636:886.557   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T3914 2637:203.434 - 325.527ms returns "Failed to open DLL"
+T3914 2637:203.487 JLINK_ExecCommand("ProjectFile = D:\GIT\ESE516Group\WINC1500_HTTP_DOWNLOADER_EXAMPLE1\jlink.config", ...). 
+T3914 2637:203.928 - 0.449ms returns 0x00
+T3914 2637:203.957 JLINK_SetLogFile(...)
+T3914 2637:203.963 - 0.008ms
+T4A74 2637:203.984 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2637:207.266 - 3.289ms returns 0
+T4A74 2637:207.281 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2637:297.775 - 90.507ms returns 0
+T4A74 2638:338.083 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2638:340.752 - 2.674ms returns 0
+T4A74 2638:340.764 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2638:430.728 - 89.984ms returns 0
+T4A74 2639:473.360 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2639:476.581 - 3.231ms returns 0
+T4A74 2639:476.598 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2639:567.701 - 91.113ms returns 0
+T4A74 2640:614.108 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2640:618.317 - 4.226ms returns 0
+T4A74 2640:618.345 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2640:709.630 - 91.297ms returns 0
+T4A74 2641:759.317 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2641:762.702 - 3.396ms returns 0
+T4A74 2641:762.722 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2641:852.936 - 90.225ms returns 0
+T4A74 2642:893.740 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2642:896.761 - 3.033ms returns 0
+T4A74 2642:896.781 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2642:986.925 - 90.157ms returns 0
+T4A74 2644:028.433 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2644:031.277 - 2.851ms returns 0
+T4A74 2644:031.291 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2644:121.914 - 90.636ms returns 0
+T4A74 2645:165.479 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2645:168.322 - 2.848ms returns 0
+T4A74 2645:168.334 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2645:258.859 - 90.541ms returns 0
+T4A74 2646:300.198 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2646:303.018 - 2.827ms returns 0
+T4A74 2646:303.033 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2646:392.807 - 89.784ms returns 0
+T4A74 2647:433.093 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2647:435.973 - 2.887ms returns 0
+T4A74 2647:435.987 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2647:526.787 - 90.811ms returns 0
+T4A74 2648:568.638 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2648:571.624 - 2.997ms returns 0
+T4A74 2648:571.644 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2648:662.745 - 91.115ms returns 0
+T4A74 2649:712.106 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2649:715.052 - 2.953ms returns 0
+T4A74 2649:715.067 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2649:806.662 - 91.607ms returns 0
+T4A74 2650:850.575 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2650:853.562 - 2.994ms returns 0
+T4A74 2650:853.576 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2650:944.626 - 91.062ms returns 0
+T4A74 2651:986.050 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2651:988.902 - 2.859ms returns 0
+T4A74 2651:988.915 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2652:080.639 - 91.734ms returns 0
+T4A74 2653:127.784 JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000032) 
+T4A74 2653:131.340 - 3.566ms returns 0
+T4A74 2653:131.360 JLINK_EMU_GetList(InterfaceMask = 0x00000002, MaxInfos = 0x00000032) 
+T4A74 2653:222.533 - 91.183ms returns 0

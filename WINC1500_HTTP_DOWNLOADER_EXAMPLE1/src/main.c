@@ -21,15 +21,15 @@
 #include "SerialConsole.h"
 #include "FreeRTOS.h"
 #include "driver/include/m2m_wifi.h"
-#include "FreeRTOS_Threads/CliThread/CliThread.h"
-#include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
 #include "SeesawDriver/Seesaw.h"
-#include "IMU_Driver/lsm6ds_reg.h"
+#include "OLED_driver/OLED_driver.h"
 
-//#include "FreeRTOS_Threads/DistanceDriver/DistanceSensor.h"
+//Threads
+#include "FreeRTOS_Threads/CliThread/CliThread.h"
+#include "FreeRTOS_Threads/LightThread/LightThread.h"
+#include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
 #include "FreeRTOS_Threads/UiHandlerThread/UiHandlerThread.h"
 #include "FreeRTOS_Threads/ControlThread/ControlThread.h"
-#include "OLED_driver/OLED_driver.h"
 
 /******************************************************************************
 * Defines and Types
@@ -55,6 +55,7 @@ static TaskHandle_t daemonTaskHandle    = NULL; //!< Daemon task handle
 static TaskHandle_t wifiTaskHandle    = NULL; //!< Wifi task handle
 static TaskHandle_t uiTaskHandle    = NULL; //!< UI task handle
 static TaskHandle_t controlTaskHandle    = NULL; //!< Control task handle
+static TaskHandle_t lightTaskHandle    = NULL; //!< Control task handle
 
 char bufferPrint[64]; //Buffer for daemon task
 
@@ -122,26 +123,6 @@ void vApplicationDaemonTaskStartupHook(void)
 	{
 		SerialConsoleWriteString("Initialized OLED Driver!\r\n");
 	}
-// 	uint8_t whoamI = 0;
-// 	(lsm6ds3_device_id_get(GetImuStruct(), &whoamI));
-// 	
-// 	if (whoamI != LSM6DS3_ID){
-// 		SerialConsoleWriteString("Cannot find IMU!\r\n");
-// 	}
-// 	else
-// 	{
-// 		SerialConsoleWriteString("IMU found!\r\n");
-// 	}
-// 
-// 	if(InitImu() == 0)
-// 	{
-// 		SerialConsoleWriteString("IMU initialized!\r\n");
-// 	}
-// 	else
-// 	{
-// 		SerialConsoleWriteString("Could not initialize IMU\r\n");
-// 	}
-
 
 	StartTasks();
 
@@ -190,6 +171,12 @@ static void StartTasks(void)
 	}
 	snprintf(bufferPrint, 64, "Heap after starting Control Task: %d\r\n", xPortGetFreeHeapSize());
 	SerialConsoleWriteString(bufferPrint);
+
+	if(xTaskCreate(vLightReadTask, "Light Task", LIGHT_TASK_SIZE, NULL, LIGHTSENSOR_PRIORITY, &lightTaskHandle) != pdPASS) {
+		SerialConsoleWriteString("ERR: Light task could not be initialized!\r\n");
+	}
+	snprintf(bufferPrint, 64, "Heap after starting Light Task: %d\r\n", xPortGetFreeHeapSize());
+	SerialConsoleWriteString(bufferPrint);
 }
 
 static void configure_console(void)
@@ -212,93 +199,6 @@ static void configure_console(void)
 	//stdio_serial_init(GetUsartModule(), EDBG_CDC_MODULE, &usart_conf);
 	//usart_enable(&cdc_uart_module);
 }
-
-
-
-// #ifdef BOOT_TEST
-// 
-// static void TestA(void)
-// {
-// 	init_storage();
-// 	SerialConsoleWriteString("Test Program A - LED Toggles every 500ms\r\n");
-// 
-// 	FIL file_object; //FILE OBJECT used on main for the SD Card Test
-// 	char test_file_name[] = "0:FlagB.txt";
-// 	test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
-// 	FRESULT res = f_open(&file_object,
-// 	(char const *)test_file_name,
-// 	FA_CREATE_ALWAYS | FA_WRITE);
-// 
-// 	if (res != FR_OK)
-// 	{
-// 		LogMessage(LOG_INFO_LVL ,"[FAIL] res %d\r\n", res);
-// 	}
-// 	else
-// 	{
-// 		SerialConsoleWriteString("FlagB.txt added! Hold button pressed to reset device!\r\n");
-// 	}
-// 	f_close(&file_object); //Close file
-// 
-// 	while(1)
-// 	{
-// 		port_pin_set_output_level(LED_0_PIN, LED_0_INACTIVE);
-// 		delay_s(1);
-// 		port_pin_set_output_level(LED_0_PIN, LED_0_ACTIVE);
-// 		delay_s(1);
-// 		if(port_pin_get_input_level(BUTTON_0_PIN) == false)
-// 		{
-// 			delay_ms(1000);
-// 			if(port_pin_get_input_level(BUTTON_0_PIN) == false)
-// 			{
-// 				system_reset();
-// 			}
-// 		}
-// 	}
-// }
-// 
-// 
-// static void TestB(void)
-// {
-// 	init_storage();
-// 	SerialConsoleWriteString("Test Program B - LED Toggles every 100 ms second\r\n");
-// 
-// 	FIL file_object; //FILE OBJECT used on main for the SD Card Test
-// 	char test_file_name[] = "0:FlagA.txt";
-// 	test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
-// 	FRESULT res = f_open(&file_object,
-// 	(char const *)test_file_name,
-// 	FA_CREATE_ALWAYS | FA_WRITE);
-// 
-// 	if (res != FR_OK)
-// 	{
-// 		LogMessage(LOG_INFO_LVL ,"[FAIL] res %d\r\n", res);
-// 	}
-// 	else
-// 	{
-// 		SerialConsoleWriteString("FlagA.txt added! Hold button pressed to reset device!\r\n");
-// 	}
-// 	f_close(&file_object); //Close file
-// 
-// 	while(1)
-// 	{
-// 		port_pin_set_output_level(LED_0_PIN, LED_0_INACTIVE);
-// 		delay_ms(200);
-// 		port_pin_set_output_level(LED_0_PIN, LED_0_ACTIVE);
-// 		delay_ms(200);
-// 		if(port_pin_get_input_level(BUTTON_0_PIN) == false)
-// 		{
-// 			delay_ms(1000);
-// 			if(port_pin_get_input_level(BUTTON_0_PIN) == false)
-// 			{
-// 				system_reset();
-// 			}
-// 			
-// 		}
-// 	}
-// }
-// 
-// #endif
-
 
 void vApplicationMallocFailedHook(void)
 {

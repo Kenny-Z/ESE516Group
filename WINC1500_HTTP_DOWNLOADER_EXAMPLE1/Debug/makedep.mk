@@ -40,13 +40,15 @@ src\FreeRTOS_Threads\CliThread\CliThread.c
 
 src\FreeRTOS_Threads\ControlThread\ControlThread.c
 
+src\FreeRTOS_Threads\LightThread\LightThread.c
+
 src\FreeRTOS_Threads\UiHandlerThread\UiHandlerThread.c
 
 src\FreeRTOS_Threads\WifiHandlerThread\WifiHandler.c
 
-src\I2cDriver\I2cDriver.c
+src\I2cDriver\I2CDriver.c
 
-src\IMU_Driver\lsm6ds_reg.c
+src\LightSensor_Driver\VEML6030.c
 
 src\OLED_Driver\OLED_driver.c
 

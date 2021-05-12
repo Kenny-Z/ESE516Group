@@ -1,5 +1,5 @@
-src/I2cDriver/I2cDriver.d src/I2cDriver/I2cDriver.o: \
- ../src/I2cDriver/I2cDriver.c ../src/I2cDriver/I2cDriver.h \
+src/I2cDriver/I2CDriver.d src/I2cDriver/I2CDriver.o: \
+ ../src/I2cDriver/I2CDriver.c ../src/I2cDriver/I2cDriver.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_master.h \
  ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
  ../src/ASF/sam0/utils/compiler.h \

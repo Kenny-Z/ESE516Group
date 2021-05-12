@@ -14,7 +14,6 @@
 #include "asf.h"
 #include "FreeRTOS_Threads/UiHandlerThread/UiHandlerThread.h"
 #include "SeesawDriver/Seesaw.h"
-#include "IMU_Driver/lsm6ds_reg.h"
 #include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
 #include "SerialConsole.h"
 #include "main.h"
