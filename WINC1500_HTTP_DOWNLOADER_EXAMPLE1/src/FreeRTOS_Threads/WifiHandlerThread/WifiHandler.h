@@ -102,8 +102,8 @@ struct RgbColorPacket
 #define GAME_TOPIC_IN			"P1_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
 #define GAME_TOPIC_OUT			"P2_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
 #define STATUS_TOPIC			"P1_Satus_VoodooMagic_T0" //Students to change to an unique identifier for each device! IMU Data
-
-#else
+#endif
+#ifndef PLAYER1
 /* Chat MQTT topic. */
 //#define LED_TOPIC			"P2_LED_ESE516_T0"	//Students to change to an unique identifier for each device! LED Data
 #define GAME_TOPIC_IN			"P2_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
