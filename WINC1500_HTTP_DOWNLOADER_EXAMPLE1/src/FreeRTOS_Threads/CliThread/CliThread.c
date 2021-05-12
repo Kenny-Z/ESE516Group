@@ -14,6 +14,7 @@
 #include "IMU_Driver/lsm6ds_reg.h"
 #include "SeesawDriver/Seesaw.h"
 #include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
+#include "OLED_driver/OLED_driver.h"
 
 /******************************************************************************
 * Defines
@@ -68,6 +69,31 @@ static const CLI_Command_Definition_t xSendDummyGameData =
  0
 };
 
+static const CLI_Command_Definition_t xOLEDdrawCircleCommand =
+{
+	"draw",
+	"draw [x][y][radius][color]: draw a circle on OLED.\r\n color selection: (0) black (1) white\r\n",
+	(const pdCOMMAND_LINE_CALLBACK)CLI_OLEDdrawCircle,
+	4
+};
+
+static const CLI_Command_Definition_t xClearOLED =
+{
+	"clos",
+	"clos: clear OLED screen\r\n",
+	(const pdCOMMAND_LINE_CALLBACK)CLI_ClearOLED,
+	0
+};
+static const CLI_Command_Definition_t xOLEDwrite =
+{
+	"write",
+	"write: write a character on screen [x][y][c]\r\n",
+	(const pdCOMMAND_LINE_CALLBACK)CLI_OLEDwriteChar,
+	3
+};
+
+
+
 //Clear screen command
 const CLI_Command_Definition_t xClearScreen =
 {
@@ -100,7 +126,9 @@ FreeRTOS_CLIRegisterCommand( &xResetCommand );
 FreeRTOS_CLIRegisterCommand( &xNeotrellisTurnLEDCommand );
 FreeRTOS_CLIRegisterCommand( &xNeotrellisProcessButtonCommand );
 FreeRTOS_CLIRegisterCommand( &xSendDummyGameData);
-
+FreeRTOS_CLIRegisterCommand( &xOLEDdrawCircleCommand );
+FreeRTOS_CLIRegisterCommand( &xClearOLED);
+FreeRTOS_CLIRegisterCommand( &xOLEDwrite);
 uint8_t cRxedChar[2], cInputIndex = 0;
 BaseType_t xMoreDataToFollow;
 /* The input and output buffers are declared static to keep them off the stack. */
@@ -368,8 +396,6 @@ BaseType_t CLI_NeotrellProcessButtonBuffer( int8_t *pcWriteBuffer,size_t xWriteB
 	pcWriteBuffer = 0;
 		return pdFALSE;
 	}
-	
-
 }
 
 
@@ -408,5 +434,67 @@ gamevar.game[10] = 0xFF;
 	{
 		snprintf(pcWriteBuffer,xWriteBufferLen, "Dummy Game Data MQTT Post\r\n");
 	}
+	return pdFALSE;
+}
+
+
+BaseType_t CLI_OLEDdrawCircle( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString ){
+	int error = NULL;
+	static int8_t *pcParameter1, *pcParameter2, *pcParameter3, *pcParameter4;
+	static BaseType_t xParameter1StringLength, xParameter2StringLength, xParameter3StringLength, xParameter4StringLength;
+	pcParameter1 = FreeRTOS_CLIGetParameter(pcCommandString,1,&xParameter1StringLength);
+	pcParameter2 = FreeRTOS_CLIGetParameter(pcCommandString,2,&xParameter2StringLength);
+	pcParameter3 = FreeRTOS_CLIGetParameter(pcCommandString,3,&xParameter3StringLength);
+	pcParameter4 = FreeRTOS_CLIGetParameter(pcCommandString,4,&xParameter4StringLength);
+	
+	/* Terminate both file names. */
+	pcParameter1[ xParameter1StringLength ] = 0x00;
+	pcParameter2[ xParameter2StringLength ] = 0x00;
+	pcParameter3[ xParameter3StringLength ] = 0x00;
+	pcParameter4[ xParameter4StringLength ] = 0x00;
+	
+	uint8_t x0 = atoi(pcParameter1);
+	uint8_t y0 = atoi(pcParameter2);
+	uint8_t radius = atoi(pcParameter3);
+	uint8_t color = atoi(pcParameter4);
+	uint8_t mode = 0;
+
+	
+	MicroOLEDcircle(x0, y0, radius, color, NORM);
+
+	error = MicroOLEDdisplay();
+	if (ERROR_NONE != error)
+	{
+		snprintf(pcWriteBuffer,xWriteBufferLen, "Could not display on OLED!\r\n");
+		return pdFALSE;
+	}
+	snprintf(pcWriteBuffer,xWriteBufferLen, "Circle Outline is drawn!\r\n");
+	return pdFALSE;
+}
+BaseType_t CLI_ClearOLED( char *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString )
+{
+	int error = NULL;
+	error = MicroOLEDclear(!ALL);
+	if (ERROR_NONE != error)
+	{
+		snprintf(pcWriteBuffer,xWriteBufferLen, "Could not clear OLED!\r\n");
+		return pdFALSE;
+	}
+	snprintf(pcWriteBuffer,xWriteBufferLen, "OLED screen is cleared!\r\n");
+	return pdFALSE;
+}
+
+BaseType_t CLI_OLEDwriteChar( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString ){
+	int error = NULL;
+	static int8_t *pcParameter1;
+	static BaseType_t xParameter1StringLength;
+	pcParameter1 = FreeRTOS_CLIGetParameter(pcCommandString,1,&xParameter1StringLength);
+
+	/* Terminate both file names. */
+	pcParameter1[ xParameter1StringLength ] = 0x00;
+
+	uint8_t c = atoi(pcParameter1);
+
+	MicroOLEDdrawWait();
 	return pdFALSE;
 }

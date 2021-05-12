@@ -117,13 +117,17 @@ typedef enum CMD
 
 	void MicroOLEDline(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t color, uint8_t mode);
 
-
 	void MicroOLEDcircle(uint8_t x, uint8_t y, uint8_t radius, uint8_t color, uint8_t mode);
 
 	void MicroOLEDcircleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint8_t mode);
 
 	void MicroOLEDdrawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t mode);
 	void MicroOLEDdrawBitmap(uint8_t *bitArray);
+	void MicroOLEDdrawWinner();
+	void MicroOLEDdrawLoser();
+	void MicroOLEDdrawTurns();
+	void MicroOLEDdrawWait();
+	void MicroOLEDwrite(uint8_t c);
 
 	uint8_t MicroOLEDgetLCDWidth(void);
 	uint8_t MicroOLEDgetLCDWidth(void);

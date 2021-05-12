@@ -25,10 +25,11 @@
 #include "FreeRTOS_Threads/WifiHandlerThread/WifiHandler.h"
 #include "SeesawDriver/Seesaw.h"
 #include "IMU_Driver/lsm6ds_reg.h"
+
 //#include "FreeRTOS_Threads/DistanceDriver/DistanceSensor.h"
 #include "FreeRTOS_Threads/UiHandlerThread/UiHandlerThread.h"
 #include "FreeRTOS_Threads/ControlThread/ControlThread.h"
-
+#include "OLED_driver/OLED_driver.h"
 
 /******************************************************************************
 * Defines and Types
@@ -111,7 +112,16 @@ void vApplicationDaemonTaskStartupHook(void)
 	{
 		SerialConsoleWriteString("Initialized Seesaw!\r\n");
 	}
-
+	
+	//initialize OLED
+	if (InitializeOLEDdriver() != STATUS_OK)
+	{
+		SerialConsoleWriteString("Error initializing OLED Driver!\r\n");
+	}
+	else
+	{
+		SerialConsoleWriteString("Initialized OLED Driver!\r\n");
+	}
 // 	uint8_t whoamI = 0;
 // 	(lsm6ds3_device_id_get(GetImuStruct(), &whoamI));
 // 	

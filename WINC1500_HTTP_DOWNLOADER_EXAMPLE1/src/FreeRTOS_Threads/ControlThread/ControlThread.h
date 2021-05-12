@@ -35,10 +35,10 @@ typedef enum controlStateMachine_state
 typedef enum GAME_STATUS
 {
 	Initialize = 0, 
-	P2_turn,
-	P1_turn, 
-	P1_Lose,
-	P2_Lose,
+	P2_turn = 1 ,
+	P1_turn = 2, 
+	P1_Lose = 3,
+	P2_Lose = 4,
 	GAME_STATUS_MAX_STATES	///<Max number of states
 
 }GAME_STATUS;

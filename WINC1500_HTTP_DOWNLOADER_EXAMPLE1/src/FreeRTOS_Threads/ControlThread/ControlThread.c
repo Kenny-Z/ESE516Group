@@ -19,6 +19,7 @@
 #include "stdio_serial.h"
 #include "SerialConsole.h"
 #include "shtc3.h"
+#include "OLED_driver/OLED_driver.h"
 /******************************************************************************
 * Defines
 ******************************************************************************/
@@ -75,7 +76,7 @@ void vControlHandlerTask( void *pvParameters )
 		{
 			case (CONTROL_WAIT_FOR_STATUS):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
-				uint8_t gamestatus;
+					uint8_t gamestatus;
 				if(pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
 				{
 					switch (gamestatus){
@@ -86,40 +87,47 @@ void vControlHandlerTask( void *pvParameters )
 // 						}
 						case P2_turn:{
 							#ifdef PLAYER1
-								controlState = CONTROL_WAIT_FOR_STATUS;	
-							#endif
-							#ifdef PLAYER2
-								controlState = CONTROL_WAIT_FOR_GAME;	
+								MicroOLEDdrawWait();
+								controlState = CONTROL_WAIT_FOR_STATUS;
+							#else
+								controlState = CONTROL_WAIT_FOR_GAME;
 							#endif
 							break;							
 						}
 						case P1_turn:{	// OLED PRINT YOUR TURN
 							#ifdef PLAYER1
-							//start to receive MQTT msg from P2
-							controlState = CONTROL_WAIT_FOR_GAME;
+								//start to receive MQTT msg from P2
+								controlState = CONTROL_WAIT_FOR_GAME;
+							#else
+								MicroOLEDdrawWait();	
+								controlState = CONTROL_WAIT_FOR_STATUS;
+							
 							#endif
-							#ifdef PLAYER2
-								controlState = CONTROL_WAIT_FOR_STATUS;	
-							#endif
-
 							break;
 						}
+						
 						case P1_Lose:{
-						// OLED PRINT YOU LOSE // End game
 						#ifdef PLAYER1
-						//LED Display Lose
-						//LED Display WIN
+						//OLED Display Lose
+						MicroOLEDdrawLoser();
+						#else
+						//OLED Display Win
+						MicroOLEDdrawWinner();
 						#endif
 						
-						controlState = CONTROL_WAIT_FOR_STATUS;
+						controlState = CONTROL_END_GAME;
 						break;
 						}
 						case P2_Lose:{
 						#ifdef PLAYER1
-						//LED Display WIN
-						//LED Display LOSE
+						//OLED Display Win
+						MicroOLEDdrawWinner();
+						#else
+						//OLED Display Lose
+						MicroOLEDdrawLoser();
 						#endif
-						controlState = CONTROL_WAIT_FOR_STATUS;
+						
+						controlState = CONTROL_END_GAME;
 						break;
 						}
 						default:{
@@ -133,20 +141,26 @@ void vControlHandlerTask( void *pvParameters )
 			}
 			case (CONTROL_WAIT_FOR_GAME):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
+
 				struct GameDataPacket gamePacketIn;
 				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
 				{
 					LogMessage(LOG_DEBUG_LVL, "Control Thread: Consumed game packet!\r\n");
+					MicroOLEDdrawTurns();
 					UiOrderShowMoves(&gamePacketIn);
 					controlState = CONTROL_PLAYING_MOVE;
 				}
-		
+			
+				
+				
+					
 				break;
 			}
-
+			
 			case (CONTROL_PLAYING_MOVE):
 			{	//Should wait until the UI thread has showed the move AND comes back with the play from the user. Should go back to CONTROL_WAIT_FOR_GAME
 				//after posting the game to MQTT
+
 				if(UiPlayIsDone() == true)
 				{
 					//Send back local game packet

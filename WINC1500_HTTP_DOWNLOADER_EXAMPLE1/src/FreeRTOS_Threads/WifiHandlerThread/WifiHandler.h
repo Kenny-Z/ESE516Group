@@ -31,9 +31,9 @@
 	 #define WIFI_PRIORITY (configMAX_PRIORITIES - 2) 
 	 
 /** Wi-Fi AP Settings. */
-#define MAIN_WLAN_SSID                       "KennyAndKira" /**< Destination SSID. Change to your WIFI SSID */
+#define MAIN_WLAN_SSID                       "YAN" /**< Destination SSID. Change to your WIFI SSID */
 #define MAIN_WLAN_AUTH                       M2M_WIFI_SEC_WPA_PSK /**< Security manner */
-#define MAIN_WLAN_PSK                        "zwj971020Verizon" /**< Password for Destination SSID. Change to your password. Please dont hack my WiFi router */
+#define MAIN_WLAN_PSK                        "wazxdewazxde" /**< Password for Destination SSID. Change to your password. Please dont hack my WiFi router */
 
 /** IP address parsing. */
 #define IPV4_BYTE(val, index)                ((val >> (index * 8)) & 0xFF)
@@ -94,7 +94,7 @@ struct RgbColorPacket
 /* Limitation of user name. */
 #define MAIN_CHAT_USER_NAME_SIZE 64
 
-#define PLAYER1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
+//#define PLAYER1 ///<Comment me to compile for player 2. Uncomment me to define for player 1.
 
 #ifdef PLAYER1
 /* Chat MQTT topic. */
@@ -106,8 +106,8 @@ struct RgbColorPacket
 #else
 /* Chat MQTT topic. */
 //#define LED_TOPIC			"P2_LED_ESE516_T0"	//Students to change to an unique identifier for each device! LED Data
-#define GAME_TOPIC_IN			"P2_GAME_ESE516_T0" //Students to change to an unique identifier for each device! Game Data
-#define GAME_TOPIC_OUT			"P1_GAME_ESE516_T0" //Students to change to an unique identifier for each device! Game Data
+#define GAME_TOPIC_IN			"P2_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
+#define GAME_TOPIC_OUT			"P1_GAME_VoodooMagic_T0" //Students to change to an unique identifier for each device! Game Data
 #define STATUS_TOPIC			"P1_Satus_VoodooMagic_T0" //Students to change to an unique identifier for each device! IMU Data
 
 #endif
