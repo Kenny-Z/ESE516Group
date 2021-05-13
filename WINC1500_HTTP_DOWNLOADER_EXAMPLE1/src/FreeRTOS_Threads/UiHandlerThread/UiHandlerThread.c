@@ -112,7 +112,8 @@ while(1)
 				uint8_t keyToShow = gamePacketIn.game[i];
 				SeesawSetLed(keyToShow, red, green, blue); //Turn button 1 on
 				SeesawOrderLedUpdate();
-				vTaskDelay(1000);			
+				//delay_ms(1000);
+				vTaskDelay(2000);			
 				SeesawSetLed(keyToShow, 0, 0, 0); //Turn button 1 on
 				SeesawOrderLedUpdate();
 			}

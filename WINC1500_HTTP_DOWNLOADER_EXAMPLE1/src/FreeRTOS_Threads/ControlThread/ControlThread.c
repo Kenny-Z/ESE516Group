@@ -78,70 +78,69 @@ void vControlHandlerTask( void *pvParameters )
 			case (CONTROL_WAIT_FOR_STATUS):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
 					
-				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
-				switch (gamestatus){
-// 						case Initialize:{
-// 							// OLED PRINT P2 TURN
-// 							controlState = CONTROL_WAIT_FOR_STATUS;
-// 							break;
-// 						}
-					case P2_turn:
-					{
-						#ifdef PLAYER1
-							MicroOLEDdrawWait();
-							controlState = CONTROL_WAIT_FOR_STATUS;
-						#else
-							MicroOLEDdrawWait();
-							controlState = CONTROL_WAIT_FOR_GAME;
-						#endif
-						break;							
-					}
-					case P1_turn:{	// OLED PRINT YOUR TURN
-						#ifdef PLAYER1
-							//start to receive MQTT msg from P2
-							MicroOLEDdrawWait();
-							controlState = CONTROL_WAIT_FOR_GAME;
-						#else
-							MicroOLEDdrawWait();
-							controlState = CONTROL_WAIT_FOR_STATUS;
-						#endif
+				if (pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
+				{
+					switch (gamestatus){
+	// 						case Initialize:{
+	// 							// OLED PRINT P2 TURN
+	// 							controlState = CONTROL_WAIT_FOR_STATUS;
+	// 							break;
+	// 						}
+						case P2_turn:{
+							#ifdef PLAYER1
+								MicroOLEDdrawWait();
+								controlState = CONTROL_WAIT_FOR_STATUS;
+							#else
+								MicroOLEDdrawWait();
+								controlState = CONTROL_WAIT_FOR_GAME;
+							#endif
+							break;							
+						}
+						case P1_turn:{	// OLED PRINT YOUR TURN
+							#ifdef PLAYER1
+								//start to receive MQTT msg from P2
+								MicroOLEDdrawWait();
+								controlState = CONTROL_WAIT_FOR_GAME;
+							#else
+								MicroOLEDdrawWait();
+								controlState = CONTROL_WAIT_FOR_STATUS;
+							#endif
+							break;
+						}
+						case P1_Lose:{
+							#ifdef PLAYER1
+							//OLED Display Lose
+							MicroOLEDdrawLoser();
+							#else
+							//OLED Display Win
+							MicroOLEDdrawWinner();
+							#endif			
+							controlState = CONTROL_END_GAME;
+							break;
+						}
+						case P2_Lose:{
+							#ifdef PLAYER1
+							//OLED Display Win
+							MicroOLEDdrawWinner();
+							#else
+							//OLED Display Lose
+							MicroOLEDdrawLoser();
+							#endif
+							controlState = CONTROL_END_GAME;
+							break;
+						}
+						default:{
+							controlState = CONTROL_WAIT_FOR_STATUS;		
 						break;
-					}
-						
-					case P1_Lose:{
-					#ifdef PLAYER1
-					//OLED Display Lose
-					MicroOLEDdrawLoser();
-					#else
-					//OLED Display Win
-					MicroOLEDdrawWinner();
-					#endif
-						
-					controlState = CONTROL_END_GAME;
-					break;
-					}
-					case P2_Lose:{
-					#ifdef PLAYER1
-					//OLED Display Win
-					MicroOLEDdrawWinner();
-					#else
-					//OLED Display Lose
-					MicroOLEDdrawLoser();
-					#endif
-					controlState = CONTROL_END_GAME;
-					break;
-					}
-					default:{
-					controlState = CONTROL_WAIT_FOR_STATUS;		
-					break;
+						}
 					}
 				}
 			}
 			//check if the game has already ended
-			if (controlState == CONTROL_END_GAME){
-				SerialConsoleWriteString("GAME END! Please reset\r\n");
-				break;
-			}
+// 			if (controlState == CONTROL_END_GAME){
+// 				SerialConsoleWriteString("GAME END! Please reset\r\n");
+// 				break;
+// 			}
 			
 					
 			
@@ -149,11 +148,13 @@ void vControlHandlerTask( void *pvParameters )
 			case (CONTROL_WAIT_FOR_GAME):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
 				//checking if the status updated
-				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
-				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
-					controlState = CONTROL_WAIT_FOR_STATUS;
-					break;
-				}
+// 				if (pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
+// 				{
+// 				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
+// 				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
+// 					controlState = CONTROL_WAIT_FOR_STATUS;
+// 					break;
+// 				}
 				//do the task
 				struct GameDataPacket gamePacketIn;
 				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
@@ -173,11 +174,11 @@ void vControlHandlerTask( void *pvParameters )
 			{	//Should wait until the UI thread has showed the move AND comes back with the play from the user. Should go back to CONTROL_WAIT_FOR_GAME
 				//after posting the game to MQTT
 				//checking if the status updated
-				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
-				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
-					controlState = CONTROL_WAIT_FOR_STATUS;
-					break;
-				}
+// 				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
+// 				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
+// 					controlState = CONTROL_WAIT_FOR_STATUS;
+// 					break;
+// 				}
 				//do the task
 				if(UiPlayIsDone() == true)
 				{
