@@ -1,3 +1,7 @@
+##Links
+Video Link:https://youtu.be/Bk4TMzykF_s
+##DashBoard
+https://voodoo-magic-ese516.mybluemix.net/ui/#!/0?socketid=0TbA7WDdFbfK_o4HAAAL
 ## Inspiration
 Simon Says game is a golden memory of many for their childhood. As we grew up, it's harder to get ground with our friends and play an easy and entertaining party game. That's why we created this gaming board with IoT technology to provide an online gaming experience, yet keeps all the laugh and joy from a golden memory.
 ## What it does
