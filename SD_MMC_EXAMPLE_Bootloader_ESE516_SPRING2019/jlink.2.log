@@ -1,0 +1,192 @@
+T441C 133:521.970   SEGGER J-Link V7.20a Log File
+T441C 133:522.114   DLL Compiled: May  7 2021 16:48:29
+T441C 133:522.139   Logging started @ 2021-05-13 00:33
+T441C 133:522.162 - 133522.174ms
+T441C 133:530.879 JLINK_ExecCommand("Device = ATSAMD21G18A", ...). 
+T441C 133:531.054   Device "ATSAMD21G18" selected.
+T441C 133:531.303 - 0.399ms returns 0x00
+T441C 133:543.270 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T441C 133:543.859 - 0.606ms returns 0x00
+T441C 133:543.892 JLINK_SetSpeed(4000)
+T441C 133:543.987 - 0.114ms
+T441C 133:544.020 JLINK_ResetPullsRESET(OFF)
+T441C 133:544.039 - 0.028ms
+T441C 133:544.059 JLINK_Connect()
+T441C 133:544.264   InitTarget() start
+T441C 133:544.305    J-Link Script File: Executing InitTarget()
+T441C 133:544.417   InitTarget()
+T441C 133:550.032   InitTarget() end
+T441C 133:551.464   Found SW-DP with ID 0x0BC11477
+T441C 133:555.921   DPIDR: 0x0BC11477
+T441C 133:555.954   Scanning AP map to find all available APs
+T441C 133:556.890   AP[1]: Stopped AP scan as end of AP map has been reached
+T441C 133:556.911   AP[0]: AHB-AP (IDR: 0x04770031)
+T441C 133:556.924   Iterating through AP map to find AHB-AP to use
+T441C 133:558.044   AP[0]: Core found
+T441C 133:558.060   AP[0]: AHB-AP ROM base: 0x41003000
+T441C 133:559.464   CPUID register: 0x410CC601. Implementer code: 0x41 (ARM)
+T441C 133:559.481   Found Cortex-M0 r0p1, Little endian.
+T441C 133:660.772   -- Max. mem block: 0x000013C8
+T441C 133:660.902   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T441C 133:661.450   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+T441C 133:662.444   CPU_ReadMem(4 bytes @ 0xE0002000)
+T441C 133:662.906   FPUnit: 4 code (BP) slots and 0 literal slots
+T441C 133:662.916   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T441C 133:663.440   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T441C 133:664.449   CPU_ReadMem(4 bytes @ 0xE0001000)
+T441C 133:664.875   CPU_WriteMem(4 bytes @ 0xE0001000)
+T441C 133:665.458   CoreSight components:
+T441C 133:665.475   ROMTbl[0] @ 41003000
+T441C 133:665.485   CPU_ReadMem(64 bytes @ 0x41003000)
+T441C 133:666.873   CPU_ReadMem(32 bytes @ 0xE00FFFE0)
+T441C 133:667.477   ROMTbl[0][0]: E00FF000, CID: B105100D, PID: 000BB4C0 ROM Table
+T441C 133:667.491   ROMTbl[1] @ E00FF000
+T441C 133:667.499   CPU_ReadMem(64 bytes @ 0xE00FF000)
+T441C 133:668.868   CPU_ReadMem(32 bytes @ 0xE000EFE0)
+T441C 133:669.470   ROMTbl[1][0]: E000E000, CID: B105E00D, PID: 000BB008 SCS
+T441C 133:669.482   CPU_ReadMem(32 bytes @ 0xE0001FE0)
+T441C 133:670.046   ROMTbl[1][1]: E0001000, CID: B105E00D, PID: 000BB00A DWT
+T441C 133:670.055   CPU_ReadMem(32 bytes @ 0xE0002FE0)
+T441C 133:670.895   ROMTbl[1][2]: E0002000, CID: B105E00D, PID: 000BB00B FPB
+T441C 133:670.904   CPU_ReadMem(32 bytes @ 0x41006FE0)
+T441C 133:671.477   ROMTbl[0][1]: 41006000, CID: B105900D, PID: 001BB932 MTB-M0+
+T441C 133:671.508 - 127.452ms returns 0x00
+T441C 133:671.541 JLINK_ExecCommand("ExcludeFlashCacheRange 0x0 - 0x40000", ...). 
+T441C 133:671.551 - 0.005ms returns 0x00
+T441C 133:671.563 JLINK_Halt()
+T441C 133:675.045 - 3.489ms returns 0x00
+T441C 133:675.778 JLINK_JTAG_GetDeviceID(DeviceIndex = 0)
+T441C 133:675.789 - 0.014ms returns 0
+T441C 133:675.798 JLINK_ReadMemU32(0x41002018, 0x1 Items)
+T441C 133:675.815   CPU_ReadMem(4 bytes @ 0x41002018)
+T441C 133:676.445   Data:  05 03 01 10
+T441C 133:676.454 - 0.658ms returns 1 (0x1)
+T55B4 133:685.517 JLINK_IsHalted()
+T55B4 133:685.883 - 0.379ms returns TRUE
+T55B4 133:685.904 JLINK_GetMOEs(...)
+T55B4 133:685.914   CPU_ReadMem(4 bytes @ 0xE000ED30)
+T55B4 133:686.449 - 0.551ms returns 0x01
+T55B4 133:686.466 JLINK_ReadReg(R15 (PC))
+T55B4 133:686.478 - 0.014ms returns 0x00019368
+T441C 133:687.239 JLINK_BeginDownload(Flags = 0x00000000)
+T441C 133:687.250 - 0.014ms
+T441C 133:687.263 JLINK_WriteMem(0x00000000, 0x25D8 Bytes, ...)
+T441C 133:687.269   Data:  50 29 00 20 C9 18 00 00 C5 18 00 00 C5 18 00 00 ...
+T441C 133:687.486   completely In flash
+T441C 133:687.508    -- Read from flash cache (9688 bytes @ 0x00000000)
+T441C 133:687.517 - 0.257ms returns 0x25D8
+T441C 133:687.625 JLINK_WriteMem(0x000025D8, 0x70 Bytes, ...)
+T441C 133:687.666   Data:  40 1F 00 00 08 00 00 00 01 00 00 00 10 00 00 20 ...
+T441C 133:687.678   completely In flash
+T441C 133:687.686    -- Read from flash cache (112 bytes @ 0x000025D8)
+T441C 133:687.694 - 0.071ms returns 0x70
+T55B4 133:886.689 JLINK_IsHalted()
+T55B4 133:886.705 - 0.019ms returns TRUE
+T441C 133:887.126 JLINK_EndDownload()
+T441C 133:887.468   CPU_ReadMem(4 bytes @ 0x41006004)
+T441C 133:887.897   CPU_ReadMem(4 bytes @ 0xE000ED90)
+T441C 133:888.473    -- --------------------------------------
+T441C 133:888.486   Flash bank @ 0x00000000: Default: L2 verify disabled because algorithm performs L1 verify
+T441C 133:888.494    -- Start of determining dirty areas in flash cache
+T441C 133:888.543    -- End of determining dirty areas
+T441C 133:888.551    -- Start of preparing flash programming
+T441C 133:888.561    -- Calculating RAM usage
+T441C 133:888.613    -- RAM usage = 2852 Bytes
+T441C 133:888.620    -- Preserving CPU registers
+T441C 133:888.638    -- Preparing memory
+T441C 133:888.646    -- Preparing target
+T441C 133:888.654    -- Preserving target RAM temporarily used for programming
+T441C 133:916.094    -- Downloading RAMCode
+T441C 133:940.477    -- Preparing RAMCode
+T441C 133:947.491    -- Checking target RAM
+T441C 133:948.482    -- End of preparing flash programming
+T441C 133:948.558   Looking for J-Link GUI Server exe at: D:\Atmel\7.0\atbackend\JLinkGUIServer.exe
+T441C 133:948.642   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T441C 133:948.676   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T441C 133:964.639   J-Link GUI Server info: "J-Link GUI server V7.20a "
+T441C 133:994.670    -- CPU speed could not be measured.
+T441C 133:994.688    -- Start of comparing flash
+T441C 133:994.696    -- CRC check was estimated as fastest method
+T441C 134:015.975    -- Comparing range 0x0000 - 0x26FF (39 Sectors, 9 KB), using multi-block CRC calculation
+T441C 134:031.608    -- All CRCs match
+T441C 134:031.869    -- Comparing range 0x0000 - 0x26FF (39 Sectors, 9 KB), using alternative multi-block CRC calculation
+T441C 134:042.958    -- All CRCs match
+T441C 134:042.975    -- End of comparing flash
+T441C 134:042.984    -- Start of erasing sectors
+T441C 134:042.991    -- End of erasing sectors
+T441C 134:042.999    -- Start of flash programming
+T441C 134:043.007    -- End of flash programming
+T441C 134:043.014    -- Start of restoring
+T441C 134:043.022    -- Restoring RAMCode
+T441C 134:047.921    -- Restoring target memory
+T441C 134:062.502    -- Restore target
+T441C 134:062.518    -- Restore memory
+T441C 134:062.527    -- Restoring CPU registers
+T441C 134:062.545    -- End of restoring
+T441C 134:062.588    -- Bank 0 @ 0x00000000: Skipped. Contents already match
+T441C 134:062.597    -- Bank 0 @ 0x00000000: Skipped. Contents already match
+T441C 134:065.623 - 178.506ms returns 0 (0x0)
+T441C 134:065.667 JLINK_ResetPullsRESET(ON)
+T441C 134:065.677 - 0.013ms
+T441C 134:065.686 JLINK_ResetNoHalt()
+T441C 134:065.931   InitTarget() start
+T441C 134:065.943    J-Link Script File: Executing InitTarget()
+T441C 134:065.955   InitTarget()
+T441C 134:072.095   InitTarget() end
+T441C 134:073.527   Found SW-DP with ID 0x0BC11477
+T441C 134:078.001   DPIDR: 0x0BC11477
+T441C 134:078.033   AP map detection skipped. Manually configured AP map found.
+T441C 134:078.057   AP[0]: AHB-AP (IDR: Not set)
+T441C 134:079.521   AP[0]: Core found
+T441C 134:079.540   AP[0]: AHB-AP ROM base: 0x41003000
+T441C 134:080.512   CPUID register: 0x410CC601. Implementer code: 0x41 (ARM)
+T441C 134:080.528   Found Cortex-M0 r0p1, Little endian.
+T441C 134:181.071   -- Max. mem block: 0x000010B0
+T441C 134:181.092   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T441C 134:181.496   CPU_ReadMem(4 bytes @ 0xE0002000)
+T441C 134:182.535   FPUnit: 4 code (BP) slots and 0 literal slots
+T441C 134:182.550   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T441C 134:182.929   CPU_ReadMem(4 bytes @ 0xE0001000)
+T441C 134:183.507   CoreSight components:
+T441C 134:183.571   ROMTbl[0] @ 41003000
+T441C 134:183.580   CPU_ReadMem(64 bytes @ 0x41003000)
+T441C 134:184.927   CPU_ReadMem(32 bytes @ 0xE00FFFE0)
+T441C 134:185.528   ROMTbl[0][0]: E00FF000, CID: B105100D, PID: 000BB4C0 ROM Table
+T441C 134:185.545   ROMTbl[1] @ E00FF000
+T441C 134:185.554   CPU_ReadMem(64 bytes @ 0xE00FF000)
+T441C 134:186.920   CPU_ReadMem(32 bytes @ 0xE000EFE0)
+T441C 134:187.528   ROMTbl[1][0]: E000E000, CID: B105E00D, PID: 000BB008 SCS
+T441C 134:187.540   CPU_WriteMem(4 bytes @ 0xE0001000)
+T441C 134:188.500   CPU_ReadMem(32 bytes @ 0xE0001FE0)
+T441C 134:189.106   ROMTbl[1][1]: E0001000, CID: B105E00D, PID: 000BB00A DWT
+T441C 134:189.119   CPU_ReadMem(32 bytes @ 0xE0002FE0)
+T441C 134:190.530   ROMTbl[1][2]: E0002000, CID: B105E00D, PID: 000BB00B FPB
+T441C 134:190.541   CPU_ReadMem(32 bytes @ 0x41006FE0)
+T441C 134:191.102   ROMTbl[0][1]: 41006000, CID: B105900D, PID: 001BB932 MTB-M0+
+T441C 134:191.116   JLINK_Reset()
+T441C 134:191.125     CPU_ReadMem(4 bytes @ 0x20000000)
+T441C 134:192.500     CPU_WriteMem(4 bytes @ 0x20000000)
+T441C 134:192.935     ResetTarget() start
+T441C 134:192.944      J-Link Script File: Executing ResetTarget()
+T441C 134:193.495     CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T441C 134:194.505     CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T441C 134:194.928     CPU_WriteMem(4 bytes @ 0xE000ED0C)
+T441C 134:196.495     CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T441C 134:196.933     CPU_ReadMem(4 bytes @ 0x41002100)
+T441C 134:197.495     CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T441C 134:198.515     ResetTarget() end
+T441C 134:202.096     CPU_WriteMem(4 bytes @ 0xE0002000)
+T441C 134:202.491     CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T441C 134:202.932     CPU_ReadMem(4 bytes @ 0xE0001000)
+T441C 134:203.500     CPU_WriteMem(4 bytes @ 0xE0001000)
+T441C 134:204.502   - 13.391ms
+T441C 134:204.514   JLINK_Go()
+T441C 134:204.525     CPU_ReadMem(4 bytes @ 0xE0001000)
+T441C 134:204.930     CPU_WriteMem(4 bytes @ 0xE0001000)
+T441C 134:205.493     CPU_WriteMem(4 bytes @ 0xE0001004)
+T441C 134:206.491   - 1.981ms
+T441C 134:206.498 - 140.814ms
+T441C 134:212.116 JLINK_Close()
+T441C 134:245.739 - 33.635ms
+T441C 134:245.754   
+T441C 134:245.760   Closed

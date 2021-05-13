@@ -1,8 +1,8 @@
  /**************************************************************************//**
 * @file      UiHandlerThread.c
 * @brief     File that contains the task code and supporting code for the UI Thread for ESE516 Spring (Online) Edition
-* @author    You! :)
-* @date      2020-04-09 
+* @author    Kenny Zhang and Chen Chen
+* @date      2021-05-13
 
 ******************************************************************************/
 
@@ -22,7 +22,7 @@
 /******************************************************************************
 * Defines
 ******************************************************************************/
-#define		BUTTON_PRESSES_MAX	16	///<Number of maximum button presses to analize in one go
+#define		BUTTON_PRESSES_MAX	16	///<Number of maximum button presses to analyze in one go
 
 /******************************************************************************
 * Variables
@@ -35,7 +35,7 @@ volatile uint8_t green = 100; ///<Holds the color of the green LEDs. Can be set 
 volatile uint8_t blue = 50; ///<Holds the color of the blue LEDs. Can be set by MQTT
 
 uint8_t pressedKeys = 0; ///<Variable to count how many presses the player has done
-uint8_t keysToPress = 0; ///<Variable that holds the number of new keypresses the user should do
+uint8_t keysToPress = 0; ///<Variable that holds the number of new key presses the user should do
 bool playIsDone = false; ///<Boolean flag to indicate if the player has finished moving. Useful for COntrol to determine when to send back a play.
 uint8_t buttons[BUTTON_PRESSES_MAX]; ///<Array to hold button presses
 /******************************************************************************
@@ -53,9 +53,9 @@ uint8_t buttons[BUTTON_PRESSES_MAX]; ///<Array to hold button presses
 
 /**************************************************************************//**
 * @fn		void vUiHandlerTask( void *pvParameters )
-* @brief	STUDENT TO FILL THIS
-* @details 	student to fill this
-                				
+* @brief	Free RTOS task to handle user inputs
+* @details 	display packet received on keypad or 
+			register keypad presses and send out as packets or do nothing
 * @param[in]	Parameters passed when task is initialized. In this case we can ignore them!
 * @return		Should not return! This is a task defining function.
 * @note         
@@ -65,13 +65,6 @@ void vUiHandlerTask( void *pvParameters )
 //Do initialization code here
 SerialConsoleWriteString("UI Task Started!");
 uiState = UI_STATE_IGNORE_PRESSES; //Initial state
-
-//Graphics Test - Remove if not using
-gfx_mono_init();
-gfx_mono_draw_line(1, 1, 62, 46, GFX_PIXEL_SET);
-// Draw a filled circle with all quadrant drawn
-gfx_mono_draw_filled_circle(36, 20, 20, GFX_PIXEL_SET, GFX_WHOLE);
-
 
 //Here we start the loop for the UI State Machine
 while(1)
@@ -97,7 +90,7 @@ while(1)
 			if(presses >= BUTTON_PRESSES_MAX) presses = BUTTON_PRESSES_MAX;
 			if(presses != 0) SeesawReadKeypad(buttons,presses); //Empty Seesaw buffer just in case it has latent presses on it!
 			memset(buttons, 0, BUTTON_PRESSES_MAX);
-			//STUDENTS: Make this function show the moves of the gamePacketIn.
+			//Make this function show the moves of the gamePacketIn.
 			//You can use a static delay to show each move but a quicker delay as the message gets longer might be more fun!
 			//After you finish showing the move should go to state UI_STATE_HANDLE_BUTTONS
 			
@@ -118,17 +111,6 @@ while(1)
 				SeesawOrderLedUpdate();
 			}
 			
-// 			//In the beginner example we turn LED0 and LED15 will turn on for 500 ms then we go to UI_STATE_HANDLE_BUTTONS
-// 			SeesawSetLed(0, red, green, blue); //Turn button 1 on
-// 			SeesawOrderLedUpdate();
-// 			vTaskDelay(1000);
-// 			SeesawSetLed(0, 0, 0, 0); //Turn button 1 off
-// 			SeesawSetLed(15, red, green, blue); // Turn button 15 on
-// 			SeesawOrderLedUpdate();
-// 			vTaskDelay(1000);
-// 			SeesawSetLed(15,0,0,0); //Turn button 15 off
-// 			SeesawOrderLedUpdate();
-// 			vTaskDelay(1000);
 			uiState = UI_STATE_HANDLE_BUTTONS;
 
 			break;
@@ -205,18 +187,38 @@ while(1)
 /******************************************************************************
 * Functions
 ******************************************************************************/
+
+/**************************************************************************//**
+* @fn		void UiOrderShowMoves(struct GameDataPacket *packetIn)
+* @brief	Read packet and light up leds
+* @details 	display packet information received to keypad
+* @param[in]	Parameters passed when task is initialized. In this case we can ignore them!
+* @note         
+*****************************************************************************/
 void UiOrderShowMoves(struct GameDataPacket *packetIn){
 	memcpy(&gamePacketIn, packetIn, sizeof(gamePacketIn));
 	uiState = UI_STATE_SHOW_MOVES;
 	playIsDone = false; //Set play to false
 }
 
-
+/**************************************************************************//**
+* @fn		bool UiPlayIsDone(void)
+* @brief	note other function Uiplay is done
+* @details 	
+* @return	playIsDone status
+* @note         
+*****************************************************************************/
 bool UiPlayIsDone(void)
 {
 	return playIsDone;
 }
-
+/**************************************************************************//**
+* @fn		struct GameDataPacket *UiGetGamePacketOut(void)
+* @brief	Wrapper function to pass game data packet
+* @details 	
+* @return	Game data packet
+* @note         
+*****************************************************************************/
 struct GameDataPacket *UiGetGamePacketOut(void)
 {
 	return &gamePacketOut;
@@ -224,13 +226,11 @@ struct GameDataPacket *UiGetGamePacketOut(void)
 
 
 /**************************************************************************//**
-int UIChangeColors(uint8_t r, uint8_t g, uint8_t b);
+void UIChangeColors(uint8_t r, uint8_t g, uint8_t b);
 * @brief	Changes the LED colors
-* @param[out] 
-                				
+* @param[out]    				
 * @return		
 * @note         
-
 *****************************************************************************/
 void UIChangeColors(uint8_t r, uint8_t g, uint8_t b)
 {

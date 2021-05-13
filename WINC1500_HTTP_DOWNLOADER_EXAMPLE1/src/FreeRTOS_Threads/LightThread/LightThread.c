@@ -32,7 +32,15 @@
 ******************************************************************************/
 
 
+/**************************************************************************//**
+void vLightReadTask( void *pvParameters )
+* @brief	Free RTOS task to change RGB color depending on ALS reading
+* @param[out] 
+                				
+* @return		
+* @note         
 
+*****************************************************************************/
 
 void vLightReadTask( void *pvParameters )
 {
@@ -45,25 +53,12 @@ void vLightReadTask( void *pvParameters )
 	VEML_Power_On();
     for( ;; )
     {
-//		VEML_Power_On();
-		// After starting sensor, wait 200ms to collect data
-// 		vTaskDelay();
-//		taskENTER_CRITICAL();
 		VEML_ReadALSData(&lightdata);
-//		taskEXIT_CRITICAL();
 		uint8_t R = lightdata/10;
 		uint8_t G = lightdata/20;
 		uint8_t B = 255 - lightdata/10;
 		UIChangeColors(R,G,B);
- 		//SerialConsoleWriteString("Light!\r\n");
-// 		SerialConsoleWriteString(sensormsg);
-// 		vTaskDelay(500);
-// 		VEML_Power_Saving();
-// 		vTaskDelay(500);
-// 		VEML_Read_Power_Saving(&powersaving);
-// 		snprintf(sensormsg, 15, "Power saving:%d\r\n", powersaving);
-// 		SerialConsoleWriteString(sensormsg);
-//		VEML_Power_Off();
+
 
 		vTaskDelay(4000);
 	}

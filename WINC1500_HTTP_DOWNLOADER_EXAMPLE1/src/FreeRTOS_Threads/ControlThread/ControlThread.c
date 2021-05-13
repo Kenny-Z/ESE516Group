@@ -1,8 +1,8 @@
 /**************************************************************************//**
 * @file      ControlThread.c
 * @brief     Thread code for the ESE516 Online game control thread
-* @author    You!
-* @date      2020-04-015
+* @author    Kenny Zhang and Chen Chen
+* @date      2021-05-13
 
 ******************************************************************************/
 
@@ -81,11 +81,6 @@ void vControlHandlerTask( void *pvParameters )
 				if (pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
 				{
 					switch (gamestatus){
-	// 						case Initialize:{
-	// 							// OLED PRINT P2 TURN
-	// 							controlState = CONTROL_WAIT_FOR_STATUS;
-	// 							break;
-	// 						}
 						case P2_turn:{
 							#ifdef PLAYER1
 								MicroOLEDdrawWait();
@@ -135,28 +130,14 @@ void vControlHandlerTask( void *pvParameters )
 						}
 					}
 				}
-				break;
 			}
-			//check if the game has already ended
-// 			if (controlState == CONTROL_END_GAME){
-// 				SerialConsoleWriteString("GAME END! Please reset\r\n");
-// 				break;
-// 			}
+
 			
 					
 			
 			
 			case (CONTROL_WAIT_FOR_GAME):
 			{	//Should set the UI to ignore button presses and should wait until there is a message from the server with a new play.
-				//checking if the status updated
-// 				if (pdPASS == xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 ))
-// 				{
-// 				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
-// 				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
-// 					controlState = CONTROL_WAIT_FOR_STATUS;
-// 					break;
-// 				}
-				//do the task
 				struct GameDataPacket gamePacketIn;
 				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
 				{
@@ -174,13 +155,6 @@ void vControlHandlerTask( void *pvParameters )
 			case (CONTROL_PLAYING_MOVE):
 			{	//Should wait until the UI thread has showed the move AND comes back with the play from the user. Should go back to CONTROL_WAIT_FOR_GAME
 				//after posting the game to MQTT
-				//checking if the status updated
-// 				xQueueReceive( xQueueStatusBuffer , &gamestatus, 10 );
-// 				if (gamestatus!=P2_turn && gamestatus!=P1_turn){
-// 					controlState = CONTROL_WAIT_FOR_STATUS;
-// 					break;
-// 				}
-				//do the task
 				if(UiPlayIsDone() == true)
 				{
 					//Send back local game packet

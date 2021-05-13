@@ -52,11 +52,15 @@ I2C_Data OLEDData; ///<Global variable to use for I2C communications with the Se
 * Forward Declarations
 ******************************************************************************/
 
-/** \brief MicroOLED screen buffer.
-
-Page buffer 64 x 48 divided by 8 = 384 bytes
-Page buffer is required because in SPI mode, the host cannot read the SSD1306's GDRAM of the controller.  This page buffer serves as a scratch RAM for graphical functions.  All drawing function will first be drawn on this page buffer, only upon calling display() function will transfer the page buffer to the actual LCD controller's memory.
-*/
+/******************************************************************************
+* @brief	MicroOLED screen buffer.
+* 
+* @details	Page buffer 64 x 48 divided by 8 = 384 bytes
+*			Page buffer is required because in SPI mode, the host cannot read the SSD1306's GDRAM of the controller.  
+*			This page buffer serves as a scratch RAM for graphical functions.  
+*			All drawing function will first be drawn on this page buffer, 
+*			only upon calling display() function will transfer the page buffer to the actual LCD controller's memory.
+******************************************************************************/
 static uint8_t screenmemory[] = {
 	/* LCD Memory organised in 64 horizontal pixel and 6 rows of byte
 	 B  B .............B  -----
@@ -112,7 +116,11 @@ static uint8_t screenmemory[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	
-//winner bitmap
+/******************************************************************************
+* @brief	winner bitmap
+*
+* @details	used to draw the character on OLED
+******************************************************************************/
 const unsigned char winner [] = {
 	0x00, 0x00, 0x00, 0xFE, 0xFE, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFE, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x0E, 0xFE, 0xF8, 0x00, 0x00, 0x00, 0xE0, 0x7E, 0x3E, 0xFE, 0xC0, 0x00,
@@ -139,7 +147,11 @@ const unsigned char winner [] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
-
+/******************************************************************************
+* @brief	loser bitmap
+*
+* @details	used to draw the character on OLED
+******************************************************************************/
 const unsigned char loser [] = {
 	0x00, 0x00, 0x00, 0xC0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
@@ -166,7 +178,11 @@ const unsigned char loser [] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
-
+/******************************************************************************
+* @brief	turns bitmap
+*
+* @details	used to draw the character on OLED
+******************************************************************************/
 const unsigned char Turns [] = {
 	0x00, 0x00, 0x00, 0x20, 0x80, 0x00, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -193,7 +209,11 @@ const unsigned char Turns [] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
-
+/******************************************************************************
+* @brief	wait bitmap
+*
+* @details	used to draw the character on OLED
+******************************************************************************/
 const unsigned char WAIT [] = {
 	0x00, 0x00, 0x00, 0x20, 0x80, 0x00, 0x00, 0x00, 0x80, 0x30, 0xE0, 0x00, 0x00, 0x00, 0x00, 0xE0,
 	0x10, 0x00, 0x00, 0x00, 0x80, 0x30, 0x30, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x90, 0x00, 0x00,
@@ -258,7 +278,7 @@ const unsigned int *fontsPointer[] = {
 * Functions
 ******************************************************************************/
 
-/**************************************************************************//**
+/*****************************************************************************
 * @fn		int InitializeOLEDdriver(void)
 * @brief	Initializes the OLED driver
 * @details 	Assumes I2C is already initialized
@@ -329,12 +349,18 @@ int InitializeOLEDdriver(void)
 	error = MicroOLEDclear(!ALL);			// Erase hardware memory inside the OLED controller to avoid random data in memory.
 	return error;
 }
-
+/*****************************************************************************
+* @fn
 /** \brief Send the display a command byte
     Send a command via I2C 	to SSD1306 controller.
 	For I2C  we use the write functions
 	defined in hardware.cpp to send the data.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 
 int MicroOLEDcommand(uint8_t c)
 {
@@ -350,13 +376,19 @@ int MicroOLEDcommand(uint8_t c)
 
 }
 
-
+/*****************************************************************************
+* @fn
 /** \brief Send the display a data byte
     Send a data byte via SPI, I2C or parallel to SSD1306 controller.
 	For SPI we set the DC and CS pins here, and call spiTransfer(byte)
 	to send the data. For I2C and Parallel we use the write functions
 	defined in hardware.cpp to send the data.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 int MicroOLEDdata(uint8_t c)
 {
 	uint8_t msg[2]={I2C_DATA,c};
@@ -369,13 +401,18 @@ int MicroOLEDdata(uint8_t c)
 	
 }
 
-
+/*****************************************************************************
+* @fn
 /** \brief Clear screen buffer or SSD1306's memory.
     To clear GDRAM inside the LCD controller, pass in the variable mode = ALL and to clear screen page buffer pass in the variable mode = PAGE.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 int MicroOLEDclear(uint8_t mode)
 {
-	//	uint8_t page=6, col=0x40;
 int error = NULL;
 	if (mode == ALL)
 	{
@@ -404,10 +441,16 @@ int error = NULL;
 	return error;
 }
 
-
+/*****************************************************************************
+* @fn
 /** \brief Transfer display memory.
     Bulk move the screen buffer to the SSD1306 controller's memory so that images/graphics drawn on the screen buffer will be displayed on the OLED.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 int MicroOLEDdisplay(void)
 {
 	uint8_t i, j;
@@ -426,30 +469,48 @@ int error = NULL;
 	}
 	return error;
 }
-
+/*****************************************************************************
+* @fn
 /** \brief Set SSD1306 page address.
     Send page address command and address to the SSD1306 OLED controller.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 void MicroOLEDsetPageAddress(uint8_t add)
 {
 	add = 0xb0 | add;
 	MicroOLEDcommand(add);
 	return;
 }
-
+/*****************************************************************************
+* @fn
 /** \brief Set SSD1306 column address.
     Send column address command and address to the SSD1306 OLED controller.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 void MicroOLEDsetColumnAddress(uint8_t add)
 {
 	MicroOLEDcommand((0x10 | (add >> 4)) + 0x02);
 	MicroOLEDcommand((0x0f & add));
 	return;
 }
-
+/*****************************************************************************
+* @fn
 /** \brief Get LCD width.
     The width of the LCD return as byte.
-*/
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
+
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 uint8_t MicroOLEDgetLCDWidth(void)
 {
 	return LCDWIDTH;
@@ -464,10 +525,15 @@ uint8_t MicroOLEDgetLCDHeight(void)
 	return LCDHEIGHT;
 }
 
+/*****************************************************************************
+* @fn
+		Draw circle with radius using color and mode at x,y of the screen buffer.
+* @brief	Initializes the OLED driver
+* @details 	Assumes I2C is already initialized
 
-/*
-Draw circle with radius using color and mode at x,y of the screen buffer.
-*/
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 void MicroOLEDcircle(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint8_t mode)
 {
 
@@ -506,10 +572,13 @@ void MicroOLEDcircle(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint
 	}
 }
 
-
-/** \brief Draw pixel with color and mode.
-Draw color pixel in the screen buffer's x,y position with NORM or XOR draw mode.
-*/
+/*****************************************************************************
+* @fn			void MicroOLEDpixel(uint8_t x, uint8_t y, uint8_t color, uint8_t mode)
+* @brief		Draw pixel with color and mode.
+* @details 		Draw color pixel in the screen buffer's x,y position with NORM or XOR draw mode.
+* @return		
+* @note
+*****************************************************************************/
 void MicroOLEDpixel(uint8_t x, uint8_t y, uint8_t color, uint8_t mode)
 {
 	if ((x < 0) || (x >= LCDWIDTH) || (y < 0) || (y >= LCDHEIGHT))
@@ -528,27 +597,38 @@ void MicroOLEDpixel(uint8_t x, uint8_t y, uint8_t color, uint8_t mode)
 		screenmemory[x + (y / 8) * LCDWIDTH] &= ~_BV((y % 8));
 	}
 }
-
-/** \brief Set draw mode.
-    Set current draw mode with NORM or XOR.
-*/
+/*****************************************************************************
+* @fn		void MicroOLEDsetDrawMode(uint8_t mode)
+* @brief	Set draw mode.
+* @details 	Set current draw mode with NORM or XOR.
+* @return		
+* @note
+*****************************************************************************/
 void MicroOLEDsetDrawMode(uint8_t mode)
 {
 	drawMode = mode;
 }
+/*****************************************************************************
+* @fn		void MicroOLEDsetCursor(uint8_t x, uint8_t y)
+* @brief	Set cursor position.
+* @details 	MicroOLED's cursor position to x,y.
 
-/** \brief Set cursor position.
-MicroOLED's cursor position to x,y.
-*/
+* @return		
+* @note
+*****************************************************************************/
 void MicroOLEDsetCursor(uint8_t x, uint8_t y)
 {
 	cursorX = x;
 	cursorY = y;
 }
+/*****************************************************************************
+* @fn		uint8_t MicroOLEDsetFontType(uint8_t type)
+* @brief	Set font type.
+* @details 	Set the current font type number, ie changing to different fonts base on the type provided.
 
-/** \brief Set font type.
-    Set the current font type number, ie changing to different fonts base on the type provided.
-*/
+* @return
+* @note
+*****************************************************************************/
 uint8_t MicroOLEDsetFontType(uint8_t type)
 {
     if ((type >= MAXFONTS) || (fontsPointer[type] == NULL))
@@ -562,10 +642,14 @@ uint8_t MicroOLEDsetFontType(uint8_t type)
 	fontMapWidth = (*(fontsPointer[fontType] + 4) * 100) + *(fontsPointer[fontType] + 5); // two bytes values into integer 16
 	return true;
 }
+/*****************************************************************************
+* @fn		void MicroOLEDsetColor(uint8_t color)
+* @brief	Set color.
+* @details 	Set the current draw's color. Only WHITE and BLACK available.
 
-/** \brief Set color.
-    Set the current draw's color. Only WHITE and BLACK available.
-*/
+* @return		Returns 0 if no errors.
+* @note
+*****************************************************************************/
 void MicroOLEDsetColor(uint8_t color)
 {
 	foreColor = color;
@@ -574,11 +658,14 @@ void MicroOLEDsetColor(uint8_t color)
 
 
 
+/*****************************************************************************
+* @fn		void MicroOLEDdrawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t mode)
+* @brief	Draw character with color and mode.
+* @details 	Draw character c using color and draw mode at x,y.
 
-/** \brief Draw character with color and mode.
-
-    Draw character c using color and draw mode at x,y.
-*/
+* @return	
+* @note
+*****************************************************************************/
 void MicroOLEDdrawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t mode)
 {
 	// TODO - New routine to take font of any height, at the moment limited to font height in multiple of 8 pixels
@@ -652,11 +739,14 @@ void MicroOLEDdrawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t m
 		}
 	}
 }
+/*****************************************************************************
+* @fn		void MicroOLEDwrite(uint8_t c)
+* @brief	write character.
+* @details 	Draw character c using color and draw mode at x,y.
 
-/** \brief write character.
-
-    Draw character c using color and draw mode at x,y.
-*/
+* @return	
+* @note
+*****************************************************************************/
 void MicroOLEDwrite(uint8_t c)
 {
 	if (c == '\n')

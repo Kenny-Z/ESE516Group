@@ -1,10 +1,10 @@
- /**************************************************************************//**
- * @file      UiHandlerThread.h
- * @brief     File that contains the task code and supporting code for the UI Thread for ESE516 Spring (Online) Edition
- * @author    You! :)
- * @date      2020-04-09
+/**************************************************************************//**
+* @file      UiHandlerThread.h
+* @brief     File that contains the task code and supporting code for the UI Thread for ESE516 Spring (Online) Edition
+* @author    Kenny Zhang and Chen Chen
+* @date      2021-05-13
 
- ******************************************************************************/
+******************************************************************************/
 
 #pragma once
 #ifdef __cplusplus

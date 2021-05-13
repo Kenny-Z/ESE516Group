@@ -8,13 +8,20 @@
 ******************************************************************************/
 
 
+
+
+
 #ifndef OLED_DRIVER_H_
 #define OLED_DRIVER_H_
-
+/******************************************************************************
+* Includes
+******************************************************************************/
 #include <stdio.h>
 #include "I2cDriver/I2cDriver.h"
 #include "SerialConsole.h"
-
+/******************************************************************************
+* Defines
+******************************************************************************/
 #define OLED_I2C_ADDRESS_SA0_0 0b0111100
 #define OLED_I2C_ADDRESS_SA0_1 0b0111101
 #define I2C_ADDRESS_UNDEFINED 0b00000000
@@ -62,7 +69,9 @@
 #define EXTERNALVCC 0x01
 #define SWITCHCAPVCC 0x02
 
-
+/******************************************************************************
+* Structures and Enumerations
+******************************************************************************/
 
 typedef enum CMD
 {
@@ -89,11 +98,9 @@ typedef enum CMD
 
 
 
-	
-	////Set the max number of bytes set in a given I2C transaction
-	//uint8_t i2cTransactionSize = 32; //Default to ATmega328 limit
-
-
+/******************************************************************************
+* Global Function Declaration
+******************************************************************************/
 	uint8_t mosipinmask, sckpinmask, sspinmask, dcpinmask;
 	uint8_t foreColor, drawMode, fontWidth, fontHeight, fontType, fontStartChar, fontTotalChar, cursorX, cursorY;
 	uint16_t fontMapWidth;

@@ -94,27 +94,27 @@ static void HTTP_DownloadFileTransaction(void);
 
 /*HTPP RELATED STATIOC FUNCTIONS*/
 
-/**
- * \brief Initialize download state to not ready.
- */
+/******************************************************************************
+* @brief Initialize download state to not ready.
+ ******************************************************************************/
 static void init_state(void)
 {
 	down_state = NOT_READY;
 }
 
-/**
- * \brief Clear state parameter at download processing state.
- * \param[in] mask Check download_state.
- */
+/******************************************************************************
+* @brief Clear state parameter at download processing state.
+* @param[in] mask Check download_state.
+ ******************************************************************************/
 static void clear_state(download_state mask)
 {
 	down_state &= ~mask;
 }
 
-/**
- * \brief Add state parameter at download processing state.
- * \param[in] mask Check download_state.
- */
+/******************************************************************************
+* @brief Add state parameter at download processing state.
+* @param[in] mask Check download_state.
+******************************************************************************/
 static void add_state(download_state mask)
 {
 	down_state |= mask;
@@ -123,23 +123,23 @@ static void add_state(download_state mask)
 
 
 
-/**
- * \brief File download processing state check.
- * \param[in] mask Check download_state.
- * \return true if this state is set, false otherwise.
- */
+/******************************************************************************
+* @brief File download processing state check.
+* @param[in] mask Check download_state.
+* @return true if this state is set, false otherwise.
+******************************************************************************/
 
 static inline bool is_state_set(download_state mask)
 {
 	return ((down_state & mask) != 0);
 }
 
-/**
+/******************************************************************************
  * \brief File existing check.
  * \param[in] fp The file pointer to check.
  * \param[in] file_path_name The file name to check.
  * \return true if this file name is exist, false otherwise.
- */
+******************************************************************************/
 static bool is_exist_file(FIL *fp, const char *file_path_name)
 {
 	if (fp == NULL || file_path_name == NULL) {
@@ -151,13 +151,13 @@ static bool is_exist_file(FIL *fp, const char *file_path_name)
 	return (ret == FR_OK);
 }
 
-/**
- * \brief Make to unique file name.
- * \param[in] fp The file pointer to check.
- * \param[out] file_path_name The file name change to uniquely and changed name is returned to this buffer.
- * \param[in] max_len Maximum file name length.
- * \return true if this file name is unique, false otherwise.
- */
+/******************************************************************************
+* @brief Make to unique file name.
+* @param[in] fp The file pointer to check.
+* @param[out] file_path_name The file name change to uniquely and changed name is returned to this buffer.
+* @param[in] max_len Maximum file name length.
+* @return true if this file name is unique, false otherwise.
+******************************************************************************/
 static bool rename_to_unique(FIL *fp, char *file_path_name, uint8_t max_len)
 {
 	#define NUMBRING_MAX (3)
@@ -226,7 +226,7 @@ static bool rename_to_unique(FIL *fp, char *file_path_name, uint8_t max_len)
 	return false;
 }
 
-/**
+/******************************************************************************
  * \brief Start file download via HTTP connection.
  */
 static void start_download(void)
@@ -320,7 +320,7 @@ static void store_file_packet(char *data, uint32_t length)
 	}
 }
 
-/**
+/******************************************************************************
  * \brief Callback of the HTTP client.
  *
  * \param[in]  module_inst     Module instance of HTTP client module.

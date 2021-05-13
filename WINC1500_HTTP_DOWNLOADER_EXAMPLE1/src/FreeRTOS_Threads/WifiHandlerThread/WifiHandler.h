@@ -12,23 +12,23 @@
  #pragma once
  #ifdef __cplusplus
  extern "C" {
-	 #endif
+#endif
 
-	 /******************************************************************************
-	 * Includes
-	 ******************************************************************************/
-	 #include "asf.h"
-	 /******************************************************************************
-	 * Defines
-	 ******************************************************************************/
+/******************************************************************************
+* Includes
+******************************************************************************/
+#include "asf.h"
+/******************************************************************************
+* Defines
+******************************************************************************/
 
-	 #define WIFI_MQTT_INIT			0	///<State for Wifi handler to Initialize MQTT Connection
-	 #define WIFI_MQTT_HANDLE		1	///<State for Wifi handler to Handle MQTT Connection
-	 #define WIFI_DOWNLOAD_INIT		2	///<State for Wifi handler to Initialize Download Connection
-	 #define WIFI_DOWNLOAD_HANDLE	3	///<State for Wifi handler to Handle Download Connection
+#define WIFI_MQTT_INIT			0	///<State for Wifi handler to Initialize MQTT Connection
+#define WIFI_MQTT_HANDLE		1	///<State for Wifi handler to Handle MQTT Connection
+#define WIFI_DOWNLOAD_INIT		2	///<State for Wifi handler to Initialize Download Connection
+#define WIFI_DOWNLOAD_HANDLE	3	///<State for Wifi handler to Handle Download Connection
 
-	 #define WIFI_TASK_SIZE	1000
-	 #define WIFI_PRIORITY (configMAX_PRIORITIES - 2) 
+#define WIFI_TASK_SIZE	1000
+#define WIFI_PRIORITY (configMAX_PRIORITIES - 2) 
 	 
 /** Wi-Fi AP Settings. */
 #define MAIN_WLAN_SSID                       "KennyAndKira" /**< Destination SSID. Change to your WIFI SSID */
