@@ -135,6 +135,7 @@ void vControlHandlerTask( void *pvParameters )
 						}
 					}
 				}
+				break;
 			}
 			//check if the game has already ended
 // 			if (controlState == CONTROL_END_GAME){

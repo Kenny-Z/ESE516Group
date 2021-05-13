@@ -27,11 +27,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_macro  000418d6  00000000  00000000  0019d976  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0005b186  00000000  00000000  001df24c  2**0
+ 12 .debug_line   0005b182  00000000  00000000  001df24c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    000bc7c4  00000000  00000000  0023a3d2  2**0
+ 13 .debug_str    000bc7c4  00000000  00000000  0023a3ce  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  000079cc  00000000  00000000  002f6b98  2**2
+ 14 .debug_frame  000079cc  00000000  00000000  002f6b94  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3091,7 +3091,7 @@ void vControlHandlerTask( void *pvParameters )
 				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
    13066:	4e3a      	ldr	r6, [pc, #232]	; (13150 <vControlHandlerTask+0x134>)
    13068:	4d3d      	ldr	r5, [pc, #244]	; (13160 <vControlHandlerTask+0x144>)
-   1306a:	e015      	b.n	13098 <vControlHandlerTask+0x7c>
+   1306a:	e03f      	b.n	130ec <vControlHandlerTask+0xd0>
 		SerialConsoleWriteString("ERROR Initializing Control Data queues!\r\n");
    1306c:	483d      	ldr	r0, [pc, #244]	; (13164 <vControlHandlerTask+0x148>)
    1306e:	4b36      	ldr	r3, [pc, #216]	; (13148 <vControlHandlerTask+0x12c>)
@@ -3106,96 +3106,96 @@ void vControlHandlerTask( void *pvParameters )
    1307e:	4b38      	ldr	r3, [pc, #224]	; (13160 <vControlHandlerTask+0x144>)
    13080:	4798      	blx	r3
    13082:	2801      	cmp	r0, #1
-   13084:	d015      	beq.n	130b2 <vControlHandlerTask+0x96>
+   13084:	d12f      	bne.n	130e6 <vControlHandlerTask+0xca>
+					switch (gamestatus){
+   13086:	2317      	movs	r3, #23
+   13088:	446b      	add	r3, sp
+   1308a:	781b      	ldrb	r3, [r3, #0]
+   1308c:	2b02      	cmp	r3, #2
+   1308e:	d014      	beq.n	130ba <vControlHandlerTask+0x9e>
+   13090:	b2da      	uxtb	r2, r3
+   13092:	2a02      	cmp	r2, #2
+   13094:	d909      	bls.n	130aa <vControlHandlerTask+0x8e>
+   13096:	2b03      	cmp	r3, #3
+   13098:	d015      	beq.n	130c6 <vControlHandlerTask+0xaa>
+   1309a:	2b04      	cmp	r3, #4
+   1309c:	d119      	bne.n	130d2 <vControlHandlerTask+0xb6>
+							MicroOLEDdrawWinner();
+   1309e:	4b32      	ldr	r3, [pc, #200]	; (13168 <vControlHandlerTask+0x14c>)
+   130a0:	4798      	blx	r3
+							controlState = CONTROL_END_GAME;
+   130a2:	2203      	movs	r2, #3
+   130a4:	4b2d      	ldr	r3, [pc, #180]	; (1315c <vControlHandlerTask+0x140>)
+   130a6:	701a      	strb	r2, [r3, #0]
+							break;
+   130a8:	e01d      	b.n	130e6 <vControlHandlerTask+0xca>
+					switch (gamestatus){
+   130aa:	2b01      	cmp	r3, #1
+   130ac:	d111      	bne.n	130d2 <vControlHandlerTask+0xb6>
+								MicroOLEDdrawWait();
+   130ae:	4b2f      	ldr	r3, [pc, #188]	; (1316c <vControlHandlerTask+0x150>)
+   130b0:	4798      	blx	r3
+								controlState = CONTROL_WAIT_FOR_STATUS;
+   130b2:	2200      	movs	r2, #0
+   130b4:	4b29      	ldr	r3, [pc, #164]	; (1315c <vControlHandlerTask+0x140>)
+   130b6:	701a      	strb	r2, [r3, #0]
+							break;							
+   130b8:	e015      	b.n	130e6 <vControlHandlerTask+0xca>
+								MicroOLEDdrawWait();
+   130ba:	4b2c      	ldr	r3, [pc, #176]	; (1316c <vControlHandlerTask+0x150>)
+   130bc:	4798      	blx	r3
+								controlState = CONTROL_WAIT_FOR_GAME;
+   130be:	2201      	movs	r2, #1
+   130c0:	4b26      	ldr	r3, [pc, #152]	; (1315c <vControlHandlerTask+0x140>)
+   130c2:	701a      	strb	r2, [r3, #0]
+							break;
+   130c4:	e00f      	b.n	130e6 <vControlHandlerTask+0xca>
+							MicroOLEDdrawLoser();
+   130c6:	4b2a      	ldr	r3, [pc, #168]	; (13170 <vControlHandlerTask+0x154>)
+   130c8:	4798      	blx	r3
+							controlState = CONTROL_END_GAME;
+   130ca:	2203      	movs	r2, #3
+   130cc:	4b23      	ldr	r3, [pc, #140]	; (1315c <vControlHandlerTask+0x140>)
+   130ce:	701a      	strb	r2, [r3, #0]
+							break;
+   130d0:	e009      	b.n	130e6 <vControlHandlerTask+0xca>
+							controlState = CONTROL_WAIT_FOR_STATUS;		
+   130d2:	2200      	movs	r2, #0
+   130d4:	4b21      	ldr	r3, [pc, #132]	; (1315c <vControlHandlerTask+0x140>)
+   130d6:	701a      	strb	r2, [r3, #0]
+						break;
+   130d8:	e005      	b.n	130e6 <vControlHandlerTask+0xca>
 				if(pdPASS == xQueueReceive( xQueueGameBufferIn , &gamePacketIn, 10 ))
-   13086:	220a      	movs	r2, #10
-   13088:	4669      	mov	r1, sp
-   1308a:	6830      	ldr	r0, [r6, #0]
-   1308c:	47a8      	blx	r5
-   1308e:	2801      	cmp	r0, #1
-   13090:	d039      	beq.n	13106 <vControlHandlerTask+0xea>
+   130da:	220a      	movs	r2, #10
+   130dc:	4669      	mov	r1, sp
+   130de:	6830      	ldr	r0, [r6, #0]
+   130e0:	47a8      	blx	r5
+   130e2:	2801      	cmp	r0, #1
+   130e4:	d00f      	beq.n	13106 <vControlHandlerTask+0xea>
 			}
 			
 			default:
 				controlState = CONTROL_WAIT_FOR_STATUS;
 		}
 	vTaskDelay(5);
-   13092:	2005      	movs	r0, #5
-   13094:	4b34      	ldr	r3, [pc, #208]	; (13168 <vControlHandlerTask+0x14c>)
-   13096:	4798      	blx	r3
+   130e6:	2005      	movs	r0, #5
+   130e8:	4b22      	ldr	r3, [pc, #136]	; (13174 <vControlHandlerTask+0x158>)
+   130ea:	4798      	blx	r3
 		switch(controlState)
-   13098:	7823      	ldrb	r3, [r4, #0]
-   1309a:	2b01      	cmp	r3, #1
-   1309c:	d0f3      	beq.n	13086 <vControlHandlerTask+0x6a>
-   1309e:	2b00      	cmp	r3, #0
-   130a0:	d0e8      	beq.n	13074 <vControlHandlerTask+0x58>
-   130a2:	2b02      	cmp	r3, #2
-   130a4:	d03b      	beq.n	1311e <vControlHandlerTask+0x102>
-   130a6:	2b03      	cmp	r3, #3
-   130a8:	d0f3      	beq.n	13092 <vControlHandlerTask+0x76>
+   130ec:	7823      	ldrb	r3, [r4, #0]
+   130ee:	2b01      	cmp	r3, #1
+   130f0:	d0f3      	beq.n	130da <vControlHandlerTask+0xbe>
+   130f2:	2b00      	cmp	r3, #0
+   130f4:	d0be      	beq.n	13074 <vControlHandlerTask+0x58>
+   130f6:	2b02      	cmp	r3, #2
+   130f8:	d011      	beq.n	1311e <vControlHandlerTask+0x102>
+   130fa:	2b03      	cmp	r3, #3
+   130fc:	d0f3      	beq.n	130e6 <vControlHandlerTask+0xca>
 				controlState = CONTROL_WAIT_FOR_STATUS;
-   130aa:	2200      	movs	r2, #0
-   130ac:	4b2b      	ldr	r3, [pc, #172]	; (1315c <vControlHandlerTask+0x140>)
-   130ae:	701a      	strb	r2, [r3, #0]
-   130b0:	e7ef      	b.n	13092 <vControlHandlerTask+0x76>
-					switch (gamestatus){
-   130b2:	2317      	movs	r3, #23
-   130b4:	446b      	add	r3, sp
-   130b6:	781b      	ldrb	r3, [r3, #0]
-   130b8:	2b02      	cmp	r3, #2
-   130ba:	d014      	beq.n	130e6 <vControlHandlerTask+0xca>
-   130bc:	b2da      	uxtb	r2, r3
-   130be:	2a02      	cmp	r2, #2
-   130c0:	d909      	bls.n	130d6 <vControlHandlerTask+0xba>
-   130c2:	2b03      	cmp	r3, #3
-   130c4:	d015      	beq.n	130f2 <vControlHandlerTask+0xd6>
-   130c6:	2b04      	cmp	r3, #4
-   130c8:	d119      	bne.n	130fe <vControlHandlerTask+0xe2>
-							MicroOLEDdrawWinner();
-   130ca:	4b28      	ldr	r3, [pc, #160]	; (1316c <vControlHandlerTask+0x150>)
-   130cc:	4798      	blx	r3
-							controlState = CONTROL_END_GAME;
-   130ce:	2203      	movs	r2, #3
-   130d0:	4b22      	ldr	r3, [pc, #136]	; (1315c <vControlHandlerTask+0x140>)
-   130d2:	701a      	strb	r2, [r3, #0]
-							break;
-   130d4:	e7d7      	b.n	13086 <vControlHandlerTask+0x6a>
-					switch (gamestatus){
-   130d6:	2b01      	cmp	r3, #1
-   130d8:	d111      	bne.n	130fe <vControlHandlerTask+0xe2>
-								MicroOLEDdrawWait();
-   130da:	4b25      	ldr	r3, [pc, #148]	; (13170 <vControlHandlerTask+0x154>)
-   130dc:	4798      	blx	r3
-								controlState = CONTROL_WAIT_FOR_STATUS;
-   130de:	2200      	movs	r2, #0
-   130e0:	4b1e      	ldr	r3, [pc, #120]	; (1315c <vControlHandlerTask+0x140>)
-   130e2:	701a      	strb	r2, [r3, #0]
-							break;							
-   130e4:	e7cf      	b.n	13086 <vControlHandlerTask+0x6a>
-								MicroOLEDdrawWait();
-   130e6:	4b22      	ldr	r3, [pc, #136]	; (13170 <vControlHandlerTask+0x154>)
-   130e8:	4798      	blx	r3
-								controlState = CONTROL_WAIT_FOR_GAME;
-   130ea:	2201      	movs	r2, #1
-   130ec:	4b1b      	ldr	r3, [pc, #108]	; (1315c <vControlHandlerTask+0x140>)
-   130ee:	701a      	strb	r2, [r3, #0]
-							break;
-   130f0:	e7c9      	b.n	13086 <vControlHandlerTask+0x6a>
-							MicroOLEDdrawLoser();
-   130f2:	4b20      	ldr	r3, [pc, #128]	; (13174 <vControlHandlerTask+0x158>)
-   130f4:	4798      	blx	r3
-							controlState = CONTROL_END_GAME;
-   130f6:	2203      	movs	r2, #3
-   130f8:	4b18      	ldr	r3, [pc, #96]	; (1315c <vControlHandlerTask+0x140>)
-   130fa:	701a      	strb	r2, [r3, #0]
-							break;
-   130fc:	e7c3      	b.n	13086 <vControlHandlerTask+0x6a>
-							controlState = CONTROL_WAIT_FOR_STATUS;		
    130fe:	2200      	movs	r2, #0
    13100:	4b16      	ldr	r3, [pc, #88]	; (1315c <vControlHandlerTask+0x140>)
    13102:	701a      	strb	r2, [r3, #0]
-						break;
-   13104:	e7bf      	b.n	13086 <vControlHandlerTask+0x6a>
+   13104:	e7ef      	b.n	130e6 <vControlHandlerTask+0xca>
 					LogMessage(LOG_DEBUG_LVL, "Control Thread: Consumed game packet!\r\n");
    13106:	491c      	ldr	r1, [pc, #112]	; (13178 <vControlHandlerTask+0x15c>)
    13108:	4b1c      	ldr	r3, [pc, #112]	; (1317c <vControlHandlerTask+0x160>)
@@ -3211,12 +3211,12 @@ void vControlHandlerTask( void *pvParameters )
    13116:	2202      	movs	r2, #2
    13118:	4b10      	ldr	r3, [pc, #64]	; (1315c <vControlHandlerTask+0x140>)
    1311a:	701a      	strb	r2, [r3, #0]
-   1311c:	e7b9      	b.n	13092 <vControlHandlerTask+0x76>
+   1311c:	e7e3      	b.n	130e6 <vControlHandlerTask+0xca>
 				if(UiPlayIsDone() == true)
    1311e:	4b1a      	ldr	r3, [pc, #104]	; (13188 <vControlHandlerTask+0x16c>)
    13120:	4798      	blx	r3
    13122:	2800      	cmp	r0, #0
-   13124:	d0b5      	beq.n	13092 <vControlHandlerTask+0x76>
+   13124:	d0df      	beq.n	130e6 <vControlHandlerTask+0xca>
 					if( pdTRUE != WifiAddGameDataToQueue(UiGetGamePacketOut()))
    13126:	4b19      	ldr	r3, [pc, #100]	; (1318c <vControlHandlerTask+0x170>)
    13128:	4798      	blx	r3
@@ -3233,7 +3233,7 @@ void vControlHandlerTask( void *pvParameters )
    1313a:	2200      	movs	r2, #0
    1313c:	4b07      	ldr	r3, [pc, #28]	; (1315c <vControlHandlerTask+0x140>)
    1313e:	701a      	strb	r2, [r3, #0]
-   13140:	e7a7      	b.n	13092 <vControlHandlerTask+0x76>
+   13140:	e7d1      	b.n	130e6 <vControlHandlerTask+0xca>
    13142:	46c0      	nop			; (mov r8, r8)
    13144:	00027308 	.word	0x00027308
    13148:	0001904d 	.word	0x0001904d
@@ -3244,10 +3244,10 @@ void vControlHandlerTask( void *pvParameters )
    1315c:	200041f0 	.word	0x200041f0
    13160:	000173e5 	.word	0x000173e5
    13164:	00027328 	.word	0x00027328
-   13168:	000181d5 	.word	0x000181d5
-   1316c:	00014a81 	.word	0x00014a81
-   13170:	00014abd 	.word	0x00014abd
-   13174:	00014a95 	.word	0x00014a95
+   13168:	00014a81 	.word	0x00014a81
+   1316c:	00014abd 	.word	0x00014abd
+   13170:	00014a95 	.word	0x00014a95
+   13174:	000181d5 	.word	0x000181d5
    13178:	00027354 	.word	0x00027354
    1317c:	000190fd 	.word	0x000190fd
    13180:	00014aa9 	.word	0x00014aa9
@@ -3546,9 +3546,9 @@ while(1)
 				SeesawOrderLedUpdate();
    132fc:	4d59      	ldr	r5, [pc, #356]	; (13464 <vUiHandlerTask+0x228>)
    132fe:	47a8      	blx	r5
-				vTaskDelay(1000);			
+				vTaskDelay(2000);			
    13300:	20fa      	movs	r0, #250	; 0xfa
-   13302:	0080      	lsls	r0, r0, #2
+   13302:	00c0      	lsls	r0, r0, #3
    13304:	4b4c      	ldr	r3, [pc, #304]	; (13438 <vUiHandlerTask+0x1fc>)
    13306:	4798      	blx	r3
 				SeesawSetLed(keyToShow, 0, 0, 0); //Turn button 1 on
@@ -3590,9 +3590,9 @@ while(1)
 				SeesawOrderLedUpdate();
    13342:	4e48      	ldr	r6, [pc, #288]	; (13464 <vUiHandlerTask+0x228>)
    13344:	47b0      	blx	r6
-				vTaskDelay(1000);			
+				vTaskDelay(2000);			
    13346:	20fa      	movs	r0, #250	; 0xfa
-   13348:	0080      	lsls	r0, r0, #2
+   13348:	00c0      	lsls	r0, r0, #3
    1334a:	4b3b      	ldr	r3, [pc, #236]	; (13438 <vUiHandlerTask+0x1fc>)
    1334c:	4798      	blx	r3
 				SeesawSetLed(keyToShow, 0, 0, 0); //Turn button 1 on
