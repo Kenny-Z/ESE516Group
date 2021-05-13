@@ -60,38 +60,6 @@ static const CLI_Command_Definition_t xNeotrellisProcessButtonCommand =
 };
 
 
-static const CLI_Command_Definition_t xSendDummyGameData =
-{
- "game",
- "game: Sends dummy game data\r\n",
- (const pdCOMMAND_LINE_CALLBACK)CLI_SendDummyGameData,
- 0
-};
-
-static const CLI_Command_Definition_t xOLEDdrawCircleCommand =
-{
-	"draw",
-	"draw [x][y][radius][color]: draw a circle on OLED.\r\n color selection: (0) black (1) white\r\n",
-	(const pdCOMMAND_LINE_CALLBACK)CLI_OLEDdrawCircle,
-	4
-};
-
-static const CLI_Command_Definition_t xClearOLED =
-{
-	"clos",
-	"clos: clear OLED screen\r\n",
-	(const pdCOMMAND_LINE_CALLBACK)CLI_ClearOLED,
-	0
-};
-static const CLI_Command_Definition_t xOLEDwrite =
-{
-	"write",
-	"write: write a character on screen [x][y][c]\r\n",
-	(const pdCOMMAND_LINE_CALLBACK)CLI_OLEDwriteChar,
-	3
-};
-
-
 
 //Clear screen command
 const CLI_Command_Definition_t xClearScreen =
@@ -124,10 +92,7 @@ FreeRTOS_CLIRegisterCommand( &xClearScreen );
 FreeRTOS_CLIRegisterCommand( &xResetCommand );
 FreeRTOS_CLIRegisterCommand( &xNeotrellisTurnLEDCommand );
 FreeRTOS_CLIRegisterCommand( &xNeotrellisProcessButtonCommand );
-FreeRTOS_CLIRegisterCommand( &xSendDummyGameData);
-FreeRTOS_CLIRegisterCommand( &xOLEDdrawCircleCommand );
-FreeRTOS_CLIRegisterCommand( &xClearOLED);
-FreeRTOS_CLIRegisterCommand( &xOLEDwrite);
+
 uint8_t cRxedChar[2], cInputIndex = 0;
 BaseType_t xMoreDataToFollow;
 /* The input and output buffers are declared static to keep them off the stack. */
@@ -398,102 +363,5 @@ BaseType_t CLI_NeotrellProcessButtonBuffer( int8_t *pcWriteBuffer,size_t xWriteB
 }
 
 
-/**************************************************************************//**
-BaseType_t CLI_SendDummyGameData( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString )
-* @brief	Returns dummy game data
-* @param[out] *pcWriteBuffer. Buffer we can use to write the CLI command response to! See other CLI examples on how we use this to write back!
-* @param[in] xWriteBufferLen. How much we can write into the buffer
-* @param[in] *pcCommandString. Buffer that contains the complete input. You will find the additional arguments, if needed. Please see 
-https://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_CLI/FreeRTOS_Plus_CLI_Implementing_A_Command.html#Example_Of_Using_FreeRTOS_CLIGetParameter
-Example 3
-                				
-* @return		Returns pdFALSE if the CLI command finished.
-* @note         Please see https://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_CLI/FreeRTOS_Plus_CLI_Accessing_Command_Line_Parameters.html
-				for more information on how to use the FreeRTOS CLI.
-
-*****************************************************************************/
-BaseType_t CLI_SendDummyGameData( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString )
-{
-struct GameDataPacket gamevar;
-
-gamevar.game[0] = 0;
-gamevar.game[1] = 1;
-gamevar.game[2] = 2;
-gamevar.game[3] = 3;
-gamevar.game[4] = 4;
-gamevar.game[5] = 5;
-gamevar.game[6] = 6;
-gamevar.game[7] = 7;
-gamevar.game[8] = 8;
-gamevar.game[9] = 9;
-gamevar.game[10] = 0xFF;
-
-	int error = WifiAddGameDataToQueue(&gamevar);
-	if(error == pdTRUE)
-	{
-		snprintf(pcWriteBuffer,xWriteBufferLen, "Dummy Game Data MQTT Post\r\n");
-	}
-	return pdFALSE;
-}
 
 
-BaseType_t CLI_OLEDdrawCircle( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString ){
-	int error = NULL;
-	static int8_t *pcParameter1, *pcParameter2, *pcParameter3, *pcParameter4;
-	static BaseType_t xParameter1StringLength, xParameter2StringLength, xParameter3StringLength, xParameter4StringLength;
-	pcParameter1 = FreeRTOS_CLIGetParameter(pcCommandString,1,&xParameter1StringLength);
-	pcParameter2 = FreeRTOS_CLIGetParameter(pcCommandString,2,&xParameter2StringLength);
-	pcParameter3 = FreeRTOS_CLIGetParameter(pcCommandString,3,&xParameter3StringLength);
-	pcParameter4 = FreeRTOS_CLIGetParameter(pcCommandString,4,&xParameter4StringLength);
-	
-	/* Terminate both file names. */
-	pcParameter1[ xParameter1StringLength ] = 0x00;
-	pcParameter2[ xParameter2StringLength ] = 0x00;
-	pcParameter3[ xParameter3StringLength ] = 0x00;
-	pcParameter4[ xParameter4StringLength ] = 0x00;
-	
-	uint8_t x0 = atoi(pcParameter1);
-	uint8_t y0 = atoi(pcParameter2);
-	uint8_t radius = atoi(pcParameter3);
-	uint8_t color = atoi(pcParameter4);
-	uint8_t mode = 0;
-
-	
-	MicroOLEDcircle(x0, y0, radius, color, NORM);
-
-	error = MicroOLEDdisplay();
-	if (ERROR_NONE != error)
-	{
-		snprintf(pcWriteBuffer,xWriteBufferLen, "Could not display on OLED!\r\n");
-		return pdFALSE;
-	}
-	snprintf(pcWriteBuffer,xWriteBufferLen, "Circle Outline is drawn!\r\n");
-	return pdFALSE;
-}
-BaseType_t CLI_ClearOLED( char *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString )
-{
-	int error = NULL;
-	error = MicroOLEDclear(!ALL);
-	if (ERROR_NONE != error)
-	{
-		snprintf(pcWriteBuffer,xWriteBufferLen, "Could not clear OLED!\r\n");
-		return pdFALSE;
-	}
-	snprintf(pcWriteBuffer,xWriteBufferLen, "OLED screen is cleared!\r\n");
-	return pdFALSE;
-}
-
-BaseType_t CLI_OLEDwriteChar( int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString ){
-	int error = NULL;
-	static int8_t *pcParameter1;
-	static BaseType_t xParameter1StringLength;
-	pcParameter1 = FreeRTOS_CLIGetParameter(pcCommandString,1,&xParameter1StringLength);
-
-	/* Terminate both file names. */
-	pcParameter1[ xParameter1StringLength ] = 0x00;
-
-	uint8_t c = atoi(pcParameter1);
-
-	MicroOLEDdrawWait();
-	return pdFALSE;
-}
