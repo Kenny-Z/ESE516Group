@@ -1,0 +1,10 @@
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [VoodooMagic.PrjPcb]
+   Generated File[Bill of Materials-ESE516_ExampleProject.xlsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 22:11:29 On 2021/3/3

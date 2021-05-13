@@ -1,0 +1,20 @@
+Removed Member From Class: ClassName=U_Memory Member=R25
+Removed Member From Class: ClassName=Sensors Member=R39
+Added Member To Class: ClassName=Sensors Member=Component C35 1uF 10V
+Added Member To Class: ClassName=Sensors Member=Component C36 100nF 10V
+Added Member To Class: ClassName=Sensors Member=Component C37 100nF 10V
+Added Member To Class: ClassName=U_LiPo_Charger Member=Component D4 LTST-C170CKT
+Added Member To Class: ClassName=MAIN Member=Component R8 Jumper
+Added Member To Class: ClassName=MAIN Member=Component R13 4K7 1%
+Added Member To Class: ClassName=MAIN Member=Component R16 Jumper
+Added Member To Class: ClassName=MAIN Member=Component R20 27R 1%
+Added Member To Class: ClassName=MAIN Member=Component R23 100R 1%
+Added Member To Class: ClassName=U_Memory Member=Component R26 ERJ3EKF1002V
+Added Member To Class: ClassName=5V5_BOOST Member=Component R30 140K 1%
+Added Member To Class: ClassName=5V5_BOOST Member=Component R32 453K 1%
+Added Member To Class: ClassName=U_LiPo_Charger Member=Component R34 1K 1%
+Added Member To Class: ClassName=U_LiPo_Charger Member=Component R36 1K13 1%
+Added Member To Class: ClassName=5Vto3V3_BUCK Member=Component R38 100K 1% 0402
+Added Member To Class: ClassName=Sensors Member=Component R40 10R 1%
+Added Member To Class: ClassName=Sensors Member=Component R41 10k 1%
+Added Member To Class: ClassName=Sensors Member=Component U7 I2C Touch Sensor
