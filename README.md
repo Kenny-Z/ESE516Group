@@ -5,6 +5,9 @@ For bettter imgaes: devpost Link-> https://devpost.com/software/voodoomagic
 
 Dashboard：https://voodoo-magic-ese516.mybluemix.net/ui/#!/0?socketid=0TbA7WDdFbfK_o4HAAAL
 
+## 3D model for Altium Project
+![alt text](https://github.com/Kenny-Z/WiFi-IoT-Gaming-Board/blob/main/img/3Dimage.PNG?raw=true)
+
 ## Inspiration
 Simon Says game is a golden memory of many for their childhood. As we grew up, it's harder to get ground with our friends and play an easy and entertaining party game. That's why we created this gaming board with IoT technology to provide an online gaming experience, yet keeps all the laugh and joy from a golden memory.
 ## What it does
